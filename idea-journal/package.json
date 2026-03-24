@@ -1,0 +1,22 @@
+{
+  "name": "idea-journal",
+  "version": "1.0.0",
+  "description": "A simple idea journal PWA",
+  "main": "js/app.js",
+  "type": "module",
+  "scripts": {
+    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest"
+  },
+  "keywords": [
+    "idea",
+    "journal",
+    "pwa"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "fake-indexeddb": "^6.2.5",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^30.3.0"
+  }
+}

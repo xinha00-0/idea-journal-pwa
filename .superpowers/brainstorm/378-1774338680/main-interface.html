@@ -1,0 +1,163 @@
+<h2>主界面设计 - 简洁高效</h2>
+<p class="subtitle">节省空间、轻量级、快速响应</p>
+
+<div class="split">
+  <!-- 手机界面模拟 -->
+  <div class="mockup">
+    <div class="mockup-header">手机界面预览 (320x568px)</div>
+    <div class="mockup-body">
+      <div style="background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; height: 500px; display: flex; flex-direction: column;">
+        
+        <!-- 顶部栏 -->
+        <div style="background: #4CAF50; color: white; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+          <div style="font-weight: bold;">想法记录</div>
+          <div style="display: flex; gap: 10px;">
+            <div style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 4px; font-size: 12px;">搜索</div>
+            <div style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 4px; font-size: 12px;">+</div>
+          </div>
+        </div>
+        
+        <!-- 快速记录栏 -->
+        <div style="padding: 10px; border-bottom: 1px solid #eee;">
+          <div style="border: 1px solid #ddd; border-radius: 6px; padding: 8px; background: #f9f9f9;">
+            <div style="color: #999; font-size: 14px;">快速记录想法...</div>
+          </div>
+        </div>
+        
+        <!-- 标签筛选 -->
+        <div style="padding: 8px 10px; border-bottom: 1px solid #eee; display: flex; gap: 8px; overflow-x: auto;">
+          <div style="background: #e8f5e9; color: #2e7d32; padding: 4px 10px; border-radius: 12px; font-size: 12px; white-space: nowrap;">全部</div>
+          <div style="background: #f5f5f5; color: #666; padding: 4px 10px; border-radius: 12px; font-size: 12px; white-space: nowrap;">工作</div>
+          <div style="background: #f5f5f5; color: #666; padding: 4px 10px; border-radius: 12px; font-size: 12px; white-space: nowrap;">生活</div>
+          <div style="background: #f5f5f5; color: #666; padding: 4px 10px; border-radius: 12px; font-size: 12px; white-space: nowrap;">学习</div>
+        </div>
+        
+        <!-- 想法列表 -->
+        <div style="flex: 1; overflow-y: auto; padding: 10px;">
+          <!-- 想法项 -->
+          <div style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 10px; margin-bottom: 8px; background: white;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+              <div style="font-weight: 500; font-size: 14px;">产品改进建议</div>
+              <div style="color: #999; font-size: 11px;">3小时前</div>
+            </div>
+            <div style="color: #666; font-size: 13px; margin-bottom: 5px;">考虑添加暗色模式支持，提升夜间使用体验...</div>
+            <div style="display: flex; gap: 5px;">
+              <div style="background: #e3f2fd; color: #1976d2; padding: 2px 8px; border-radius: 10px; font-size: 10px;">工作</div>
+              <div style="background: #fff3e0; color: #ef6c00; padding: 2px 8px; border-radius: 10px; font-size: 10px;">UI</div>
+            </div>
+          </div>
+          
+          <!-- 想法项 -->
+          <div style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 10px; margin-bottom: 8px; background: white;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+              <div style="font-weight: 500; font-size: 14px;">读书笔记</div>
+              <div style="color: #999; font-size: 11px;">昨天</div>
+            </div>
+            <div style="color: #666; font-size: 13px; margin-bottom: 5px;">《深度工作》核心观点：专注力是现代社会最稀缺的资源...</div>
+            <div style="display: flex; gap: 5px;">
+              <div style="background: #f3e5f5; color: #7b1fa2; padding: 2px 8px; border-radius: 10px; font-size: 10px;">学习</div>
+              <div style="background: #e8f5e8; color: #388e3c; padding: 2px 8px; border-radius: 10px; font-size: 10px;">读书</div>
+            </div>
+          </div>
+          
+          <!-- 想法项 -->
+          <div style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 10px; margin-bottom: 8px; background: white;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+              <div style="font-weight: 500; font-size: 14px;">旅行计划</div>
+              <div style="color: #999; font-size: 11px;">3天前</div>
+            </div>
+            <div style="color: #666; font-size: 13px; margin-bottom: 5px;">周末去西湖骑行，需要准备水和零食...</div>
+            <div style="display: flex; gap: 5px;">
+              <div style="background: #fce4ec; color: #c2185b; padding: 2px 8px; border-radius: 10px; font-size: 10px;">生活</div>
+              <div style="background: #e0f7fa; color: #00838f; padding: 2px 8px; border-radius: 10px; font-size: 10px;">旅行</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 底部导航 -->
+        <div style="background: #f5f5f5; border-top: 1px solid #ddd; padding: 10px; display: flex; justify-content: space-around;">
+          <div style="display: flex; flex-direction: column; align-items: center; color: #4CAF50; font-size: 12px;">
+            <div style="font-size: 18px;">📝</div>
+            <div>记录</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; color: #666; font-size: 12px;">
+            <div style="font-size: 18px;">📅</div>
+            <div>回顾</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; color: #666; font-size: 12px;">
+            <div style="font-size: 18px;">📊</div>
+            <div>统计</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; color: #666; font-size: 12px;">
+            <div style="font-size: 18px;">⚙️</div>
+            <div>设置</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 设计说明 -->
+  <div class="mockup">
+    <div class="mockup-header">设计原则与特性</div>
+    <div class="mockup-body">
+      <div class="section">
+        <h4>核心设计原则</h4>
+        <ul>
+          <li><strong>极简主义</strong> - 仅显示必要信息，减少视觉干扰</li>
+          <li><strong>快速响应</strong> - 所有操作在200ms内完成</li>
+          <li><strong>轻量级</strong> - 总页面大小控制在100KB以内</li>
+          <li><strong>离线优先</strong> - 无网络时完全可用</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h4>节省空间特性</h4>
+        <ul>
+          <li><strong>文本优先</strong> - 减少图片使用，压缩图片质量</li>
+          <li><strong>懒加载</strong> - 按需加载数据，不预加载</li>
+          <li><strong>本地缓存</strong> - 智能清理过期缓存</li>
+          <li><strong>压缩存储</strong> - 使用高效的数据结构</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h4>性能优化</h4>
+        <ul>
+          <li><strong>代码分割</strong> - 按功能模块加载</li>
+          <li><strong>虚拟滚动</strong> - 长列表优化性能</li>
+          <li><strong>防抖节流</strong> - 避免频繁操作</li>
+          <li><strong>内存管理</strong> - 及时释放不用的数据</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h4>设备资源优化</h4>
+        <ul>
+          <li><strong>CPU使用</strong> - 减少复杂动画和计算</li>
+          <li><strong>内存占用</strong> - 保持低于50MB</li>
+          <li><strong>存储空间</strong> - 单个想法<10KB</li>
+          <li><strong>电池消耗</strong> - 后台任务最小化</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>主要功能模块</h3>
+  <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+    <div style="flex: 1; min-width: 200px; background: #f9f9f9; padding: 15px; border-radius: 6px;">
+      <h4 style="margin-top: 0;">1. 快速记录</h4>
+      <p>顶部快速输入栏，支持Markdown语法，自动保存草稿</p>
+    </div>
+    <div style="flex: 1; min-width: 200px; background: #f9f9f9; padding: 15px; border-radius: 6px;">
+      <h4 style="margin-top: 0;">2. 标签筛选</h4>
+      <p>横向滚动标签栏，支持多标签筛选，智能推荐标签</p>
+    </div>
+    <div style="flex: 1; min-width: 200px; background: #f9f9f9; padding: 15px; border-radius: 6px;">
+      <h4 style="margin-top: 0;">3. 时间线视图</h4>
+      <p>按时间倒序排列，支持日期筛选，快速定位历史想法</p>
+    </div>
+  </div>
+</div>

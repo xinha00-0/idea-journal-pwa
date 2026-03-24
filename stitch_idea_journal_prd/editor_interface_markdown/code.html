@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#fbf9f8",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#3e001c",
+                        "tertiary-container": "#f26f9d",
+                        "on-surface-variant": "#3f4a3c",
+                        "secondary": "#0061a4",
+                        "surface-container-low": "#f6f3f2",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f3f0f0",
+                        "primary-container": "#4caf50",
+                        "tertiary-fixed": "#ffd9e2",
+                        "primary": "#006e1c",
+                        "surface": "#fbf9f8",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#690034",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#006e1c",
+                        "surface-container": "#f0eded",
+                        "outline-variant": "#becab9",
+                        "on-background": "#1b1c1c",
+                        "on-primary-fixed-variant": "#005313",
+                        "outline": "#6f7a6b",
+                        "on-surface": "#1b1c1c",
+                        "primary-fixed": "#94f990",
+                        "secondary-fixed": "#d1e4ff",
+                        "on-primary-fixed": "#002204",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#dcd9d9",
+                        "primary-fixed-dim": "#78dc77",
+                        "surface-variant": "#e4e2e1",
+                        "inverse-primary": "#78dc77",
+                        "inverse-surface": "#303030",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#001d36",
+                        "on-primary-container": "#003c0b",
+                        "surface-container-high": "#eae8e7",
+                        "on-secondary-fixed-variant": "#00497d",
+                        "tertiary-fixed-dim": "#ffb1c7",
+                        "on-tertiary-fixed-variant": "#861948",
+                        "secondary-container": "#33a0fd",
+                        "secondary-fixed-dim": "#9ecaff",
+                        "error-container": "#ffdad6",
+                        "background": "#fbf9f8",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e4e2e1",
+                        "on-secondary-container": "#00355c",
+                        "tertiary": "#a63360"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-xl">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-stone-200/50 transition-colors active:scale-95">
+<span class="material-symbols-outlined text-stone-500">arrow_back</span>
+</button>
+<h1 class="font-headline font-bold text-lg tracking-tight text-green-800">想法记录</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 text-stone-500 font-label text-sm hover:bg-stone-200/50 rounded-lg transition-colors">预览</button>
+<button class="px-5 py-2 bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm hover:brightness-105 active:scale-95 transition-all">保存</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-3xl mx-auto min-h-screen">
+<!-- Metadata & Tagging Area -->
+<section class="mb-10 space-y-6">
+<div class="space-y-2">
+<input class="w-full bg-transparent border-none focus:ring-0 text-3xl font-headline font-extrabold text-on-surface placeholder:text-stone-300 p-0" placeholder="给这个想法起个标题..." type="text"/>
+<div class="flex items-center gap-3 text-stone-400 font-label text-xs tracking-wider">
+<span>最后编辑：刚刚</span>
+<span class="w-1 h-1 rounded-full bg-stone-200"></span>
+<span>字符数：0</span>
+</div>
+</div>
+<!-- Tags Section -->
+<div class="flex flex-wrap items-center gap-3">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-surface-container-high rounded-full border border-stone-100">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+<span class="text-xs font-medium text-on-surface-variant">灵感</span>
+<button class="material-symbols-outlined text-xs text-stone-400">close</button>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 bg-surface-container-high rounded-full border border-stone-100">
+<div class="w-2.5 h-2.5 rounded-full bg-secondary"></div>
+<span class="text-xs font-medium text-on-surface-variant">工作</span>
+<button class="material-symbols-outlined text-xs text-stone-400">close</button>
+</div>
+<button class="flex items-center gap-1.5 px-3 py-1.5 border border-dashed border-stone-300 rounded-full text-stone-400 hover:border-primary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+<span class="text-xs font-medium">添加标签</span>
+</button>
+</div>
+</section>
+<!-- Editor Canvas -->
+<article class="relative group">
+<!-- Toolbar - Subtle Floating -->
+<div class="sticky top-20 z-40 mb-4 flex items-center gap-1 p-1.5 bg-surface-container-lowest/90 backdrop-blur-md rounded-xl shadow-sm border border-stone-100 w-fit">
+<button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface-container-low text-stone-600" title="一级标题">
+<span class="material-symbols-outlined">format_h1</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface-container-low text-stone-600" title="列表">
+<span class="material-symbols-outlined">format_list_bulleted</span>
+</button>
+<div class="w-px h-4 bg-stone-200 mx-1"></div>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface-container-low text-stone-600" title="加粗">
+<span class="material-symbols-outlined">format_bold</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface-container-low text-stone-600" title="斜体">
+<span class="material-symbols-outlined">format_italic</span>
+</button>
+<div class="w-px h-4 bg-stone-200 mx-1"></div>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface-container-low text-stone-600" title="插入链接">
+<span class="material-symbols-outlined">link</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface-container-low text-stone-600" title="上传图片">
+<span class="material-symbols-outlined">image</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface-container-low text-stone-600" title="拍照">
+<span class="material-symbols-outlined">photo_camera</span>
+</button>
+</div>
+<!-- Text Area -->
+<textarea class="w-full min-h-[500px] bg-transparent border-none focus:ring-0 text-lg leading-relaxed text-on-surface placeholder:text-stone-300 p-0 resize-none font-body" placeholder="此刻你在想什么？支持 Markdown 语法..."></textarea>
+</article>
+<!-- Asymmetric Media Placeholder (Bento Style) -->
+<section class="mt-12 grid grid-cols-12 gap-4">
+<div class="col-span-8 h-64 bg-surface-container-low rounded-2xl overflow-hidden relative group cursor-pointer border border-transparent hover:border-primary/20 transition-all">
+<img alt="Journaling workspace" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" data-alt="Minimalist desk setup with a journal, elegant fountain pen, and a soft morning light filtering through a window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS5VAH-uwOeJeiBjVcR80uJgoaUnWkiQijjTNknovUa5l29pSoYLxlJWxgRkJdH7ltMgCgOCTaYfSRXxF469LeWQjQ5gAlXnJ7IHE46oNbOa3FfyWLhjvFPokP9xXRfsgVNPLSCcORKt64bscZ5jkjRjWuD4lAJjEVraNvMPyHQdkQi9L7Se4B7IM0oJcoFY6Z5KwbZTGB-YcebQlv5bbLYDkXetQPDH-uJqBwOmTMG1zHTgrspIAMjGLPc7Gj0j6yO8tcZV4tLC7y"/>
+<div class="absolute inset-0 bg-gradient-to-t from-stone-900/40 to-transparent"></div>
+<div class="absolute bottom-4 left-4 text-white font-label text-xs">工作区参考图</div>
+</div>
+<div class="col-span-4 h-64 flex flex-col gap-4">
+<div class="flex-1 bg-surface-container-lowest rounded-2xl border border-stone-100 flex items-center justify-center group cursor-pointer">
+<span class="material-symbols-outlined text-stone-300 group-hover:text-primary transition-colors">add_a_photo</span>
+</div>
+<div class="flex-1 bg-surface-container-lowest rounded-2xl border border-stone-100 flex items-center justify-center group cursor-pointer">
+<span class="material-symbols-outlined text-stone-300 group-hover:text-secondary transition-colors">upload_file</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell (Suppressing global FAB as per guidelines) -->
+<nav class="fixed bottom-0 w-full rounded-t-xl z-50 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.04)] border-t border-stone-100 dark:border-stone-800 md:hidden">
+<div class="flex justify-around items-center h-20 pb-safe px-4 w-full">
+<div class="flex flex-col items-center justify-center text-green-700 dark:text-green-400 font-semibold transition-transform active:translate-y-[-2px] duration-200">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+<span class="font-['Inter'] font-medium text-[11px] tracking-wide">记录</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-50 transition-transform active:translate-y-[-2px] duration-200">
+<span class="material-symbols-outlined" data-icon="Timeline">timeline</span>
+<span class="font-['Inter'] font-medium text-[11px] tracking-wide">回顾</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-50 transition-transform active:translate-y-[-2px] duration-200">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-['Inter'] font-medium text-[11px] tracking-wide">统计</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-50 transition-transform active:translate-y-[-2px] duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] font-medium text-[11px] tracking-wide">设置</span>
+</div>
+</div>
+</nav>
+<!-- Floating Preview Toggle (Focused Journey Element) -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-white shadow-xl rounded-full flex items-center justify-center text-primary border border-stone-100 md:bottom-10 hover:scale-110 active:scale-90 transition-all z-40">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">visibility</span>
+</button>
+</body></html>

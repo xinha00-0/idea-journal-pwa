@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#fbf9f8",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#3e001c",
+                        "tertiary-container": "#f26f9d",
+                        "on-surface-variant": "#3f4a3c",
+                        "secondary": "#0061a4",
+                        "surface-container-low": "#f6f3f2",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f3f0f0",
+                        "primary-container": "#4caf50",
+                        "tertiary-fixed": "#ffd9e2",
+                        "primary": "#006e1c",
+                        "surface": "#fbf9f8",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#690034",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#006e1c",
+                        "surface-container": "#f0eded",
+                        "outline-variant": "#becab9",
+                        "on-background": "#1b1c1c",
+                        "on-primary-fixed-variant": "#005313",
+                        "outline": "#6f7a6b",
+                        "on-surface": "#1b1c1c",
+                        "primary-fixed": "#94f990",
+                        "secondary-fixed": "#d1e4ff",
+                        "on-primary-fixed": "#002204",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#dcd9d9",
+                        "primary-fixed-dim": "#78dc77",
+                        "surface-variant": "#e4e2e1",
+                        "inverse-primary": "#78dc77",
+                        "inverse-surface": "#303030",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#001d36",
+                        "on-primary-container": "#003c0b",
+                        "surface-container-high": "#eae8e7",
+                        "on-secondary-fixed-variant": "#00497d",
+                        "tertiary-fixed-dim": "#ffb1c7",
+                        "on-tertiary-fixed-variant": "#861948",
+                        "secondary-container": "#33a0fd",
+                        "secondary-fixed-dim": "#9ecaff",
+                        "error-container": "#ffdad6",
+                        "background": "#fbf9f8",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e4e2e1",
+                        "on-secondary-container": "#00355c",
+                        "tertiary": "#a63360"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fbf9f8;
+            color: #1b1c1c;
+        }
+        .vellum-card {
+            background-color: #ffffff;
+            border-radius: 0.5rem; /* 8px as requested */
+            margin-bottom: 1.5rem;
+        }
+        .custom-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            background: #e4e2e1;
+            border-radius: 2px;
+            outline: none;
+        }
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #006e1c;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-xl">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-stone-500 hover:bg-stone-200/50 p-2 rounded-full transition-colors cursor-pointer" data-icon="menu">menu</span>
+<h1 class="font-['Manrope'] font-bold text-lg tracking-tight text-green-800 dark:text-green-300">想法记录</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-stone-500 hover:bg-stone-200/50 p-2 rounded-full transition-colors cursor-pointer" data-icon="search">search</span>
+</div>
+</div>
+<div class="h-[1px] w-full bg-stone-200/20 dark:bg-stone-800/20"></div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 px-4 max-w-[320px] mx-auto">
+<!-- Section: Appearance -->
+<div class="mb-2">
+<h2 class="text-[11px] font-bold tracking-widest text-on-surface-variant uppercase px-1 mb-3 opacity-60">显示与外观</h2>
+<div class="vellum-card divide-y divide-surface-container">
+<!-- Theme Switch -->
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="dark_mode">dark_mode</span>
+<span class="text-sm font-medium text-on-surface">深色模式</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-10 h-5 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Font Size -->
+<div class="p-4">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-secondary" data-icon="format_size">format_size</span>
+<span class="text-sm font-medium text-on-surface">字体大小</span>
+</div>
+<div class="px-2">
+<input class="custom-slider" max="24" min="12" type="range" value="16"/>
+<div class="flex justify-between mt-1 text-[10px] text-on-surface-variant font-medium">
+<span>小</span>
+<span>标准</span>
+<span>大</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Editor -->
+<div class="mb-2">
+<h2 class="text-[11px] font-bold tracking-widest text-on-surface-variant uppercase px-1 mb-3 opacity-60">编辑器设置</h2>
+<div class="vellum-card">
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="save">save</span>
+<span class="text-sm font-medium text-on-surface">自动保存</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-10 h-5 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Section: Data Management -->
+<div class="mb-2">
+<h2 class="text-[11px] font-bold tracking-widest text-on-surface-variant uppercase px-1 mb-3 opacity-60">数据管理</h2>
+<div class="vellum-card divide-y divide-surface-container">
+<div class="flex items-center justify-between p-4 cursor-pointer hover:bg-surface-container-low transition-colors rounded-t-xl">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="export_notes">export_notes</span>
+<span class="text-sm font-medium text-on-surface">导出数据 (JSON/MD)</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-sm" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="cloud_upload">cloud_upload</span>
+<span class="text-sm font-medium text-on-surface">导入备份</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-sm" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="backup">backup</span>
+<span class="text-sm font-medium text-on-surface">云端同步</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-sm" data-icon="chevron_right">云端同步</span>
+</div>
+<!-- Storage Info -->
+<div class="p-4">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="database">database</span>
+<span class="text-sm font-medium text-on-surface">存储占用</span>
+</div>
+<span class="text-[11px] font-semibold text-primary">12.4 MB</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[15%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: System -->
+<div class="mb-6">
+<h2 class="text-[11px] font-bold tracking-widest text-on-surface-variant uppercase px-1 mb-3 opacity-60">关于</h2>
+<div class="vellum-card divide-y divide-surface-container">
+<div class="flex items-center justify-between p-4 cursor-pointer hover:bg-surface-container-low transition-colors rounded-t-xl">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="info">info</span>
+<span class="text-sm font-medium text-on-surface">关于 Idea Journal</span>
+</div>
+<span class="text-[10px] text-on-surface-variant">v2.4.0</span>
+</div>
+<div class="flex items-center justify-between p-4 cursor-pointer hover:bg-surface-container-low transition-colors rounded-b-xl">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="rate_review">rate_review</span>
+<span class="text-sm font-medium text-on-surface">意见反馈</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-sm" data-icon="open_in_new">open_in_new</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-xl z-50 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.04)] border-t border-stone-100 dark:border-stone-800">
+<div class="flex justify-around items-center h-20 pb-safe px-4 w-full">
+<!-- Tab: 记录 -->
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-600 cursor-pointer transition-all active:scale-95">
+<span class="material-symbols-outlined text-[24px]" data-icon="edit_note">edit_note</span>
+<span class="font-['Inter'] font-medium text-[11px] tracking-wide mt-1">记录</span>
+</div>
+<!-- Tab: 回顾 -->
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-600 cursor-pointer transition-all active:scale-95">
+<span class="material-symbols-outlined text-[24px]" data-icon="Timeline">timeline</span>
+<span class="font-['Inter'] font-medium text-[11px] tracking-wide mt-1">回顾</span>
+</div>
+<!-- Tab: 统计 -->
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-600 cursor-pointer transition-all active:scale-95">
+<span class="material-symbols-outlined text-[24px]" data-icon="analytics">analytics</span>
+<span class="font-['Inter'] font-medium text-[11px] tracking-wide mt-1">统计</span>
+</div>
+<!-- Tab: 设置 (Active) -->
+<div class="flex flex-col items-center justify-center text-green-700 dark:text-green-400 font-semibold cursor-pointer transition-all active:translate-y-[-2px] duration-200">
+<span class="material-symbols-outlined text-[24px]" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-['Inter'] font-medium text-[11px] tracking-wide mt-1">设置</span>
+</div>
+</div>
+</nav>
+</body></html>

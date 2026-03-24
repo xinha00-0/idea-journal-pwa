@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#fbf9f8",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed": "#3e001c",
+              "tertiary-container": "#f26f9d",
+              "on-surface-variant": "#3f4a3c",
+              "secondary": "#0061a4",
+              "surface-container-low": "#f6f3f2",
+              "on-error-container": "#93000a",
+              "inverse-on-surface": "#f3f0f0",
+              "primary-container": "#4caf50",
+              "tertiary-fixed": "#ffd9e2",
+              "primary": "#006e1c",
+              "surface": "#fbf9f8",
+              "on-secondary": "#ffffff",
+              "on-tertiary-container": "#690034",
+              "error": "#ba1a1a",
+              "surface-tint": "#006e1c",
+              "surface-container": "#f0eded",
+              "outline-variant": "#becab9",
+              "on-background": "#1b1c1c",
+              "on-primary-fixed-variant": "#005313",
+              "outline": "#6f7a6b",
+              "on-surface": "#1b1c1c",
+              "primary-fixed": "#94f990",
+              "secondary-fixed": "#d1e4ff",
+              "on-primary-fixed": "#002204",
+              "on-error": "#ffffff",
+              "surface-dim": "#dcd9d9",
+              "primary-fixed-dim": "#78dc77",
+              "surface-variant": "#e4e2e1",
+              "inverse-primary": "#78dc77",
+              "inverse-surface": "#303030",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary-fixed": "#001d36",
+              "on-primary-container": "#003c0b",
+              "surface-container-high": "#eae8e7",
+              "on-secondary-fixed-variant": "#00497d",
+              "tertiary-fixed-dim": "#ffb1c7",
+              "on-tertiary-fixed-variant": "#861948",
+              "secondary-container": "#33a0fd",
+              "secondary-fixed-dim": "#9ecaff",
+              "error-container": "#ffdad6",
+              "background": "#fbf9f8",
+              "on-primary": "#ffffff",
+              "surface-container-highest": "#e4e2e1",
+              "on-secondary-container": "#00355c",
+              "tertiary": "#a63360"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #fbf9f8; color: #1b1c1c; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .signature-gradient {
+            background: linear-gradient(45deg, #006e1c, #4caf50);
+        }
+        .secondary-gradient {
+            background: linear-gradient(45deg, #0061a4, #33a0fd);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-xl">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-xl mx-auto bg-stone-200/20 dark:bg-stone-800/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-stone-500">menu</span>
+<h1 class="font-['Manrope'] font-bold text-lg tracking-tight text-green-800 dark:text-green-300">想法记录</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-stone-500">search</span>
+<span class="material-symbols-outlined text-stone-500">add</span>
+</div>
+</div>
+</header>
+<main class="pt-20 px-4 max-w-md mx-auto space-y-6">
+<!-- Week Selector -->
+<section class="flex flex-col items-center py-4">
+<div class="flex items-center justify-between w-full px-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-secondary">chevron_left</span>
+</button>
+<div class="text-center">
+<h2 class="text-xl font-bold text-on-surface">第 42 周回顾</h2>
+<p class="text-xs font-medium tracking-wide text-secondary uppercase mt-0.5">10月16日 - 10月22日</p>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-secondary">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Stats Bento Grid -->
+<div class="grid grid-cols-2 gap-4">
+<!-- Total Ideas Card -->
+<div class="col-span-1 bg-surface-container-lowest rounded-xl p-6 shadow-sm">
+<p class="text-[11px] font-bold text-outline uppercase tracking-widest mb-1">本周想法</p>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-extrabold text-on-surface">24</span>
+<span class="text-xs font-semibold text-primary">+12%</span>
+</div>
+</div>
+<!-- Quality Metric Card -->
+<div class="col-span-1 bg-surface-container-lowest rounded-xl p-6 shadow-sm">
+<p class="text-[11px] font-bold text-outline uppercase tracking-widest mb-1">活跃天数</p>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-extrabold text-on-surface">6</span>
+<span class="text-xs text-outline">/7</span>
+</div>
+</div>
+<!-- Activity Chart Card -->
+<div class="col-span-2 bg-surface-container-lowest rounded-xl p-6 shadow-sm">
+<p class="text-[11px] font-bold text-outline uppercase tracking-widest mb-6">每日趋势</p>
+<div class="flex items-end justify-between h-24 gap-2">
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="w-full bg-secondary/10 rounded-t-lg" style="height: 40%"></div>
+<span class="text-[10px] font-medium text-outline">一</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="w-full bg-secondary/10 rounded-t-lg" style="height: 65%"></div>
+<span class="text-[10px] font-medium text-outline">二</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="w-full bg-secondary rounded-t-lg" style="height: 90%"></div>
+<span class="text-[10px] font-medium text-outline">三</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="w-full bg-secondary/40 rounded-t-lg" style="height: 30%"></div>
+<span class="text-[10px] font-medium text-outline">四</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="w-full bg-secondary/60 rounded-t-lg" style="height: 75%"></div>
+<span class="text-[10px] font-medium text-outline">五</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="w-full bg-secondary/30 rounded-t-lg" style="height: 50%"></div>
+<span class="text-[10px] font-medium text-outline">六</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2">
+<div class="w-full bg-secondary/20 rounded-t-lg" style="height: 20%"></div>
+<span class="text-[10px] font-medium text-outline">日</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Key Topics Card -->
+<section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+<h3 class="text-xs font-bold text-outline uppercase tracking-widest mb-6">核心关键词</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-2 bg-secondary-container/20 text-on-secondary-container text-xs font-semibold rounded-full">产品设计</span>
+<span class="px-4 py-2 bg-surface-container-high text-on-surface-variant text-xs font-semibold rounded-full">人工智能</span>
+<span class="px-4 py-2 bg-surface-container-high text-on-surface-variant text-xs font-semibold rounded-full">极简主义</span>
+<span class="px-4 py-2 bg-secondary-container/20 text-on-secondary-container text-xs font-semibold rounded-full">用户体验</span>
+<span class="px-4 py-2 bg-surface-container-high text-on-surface-variant text-xs font-semibold rounded-full">效率工具</span>
+<span class="px-4 py-2 bg-surface-container-high text-on-surface-variant text-xs font-semibold rounded-full">未来城市</span>
+</div>
+</section>
+<!-- Highlights Section -->
+<section class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+<div class="p-8">
+<h3 class="text-xs font-bold text-outline uppercase tracking-widest mb-6">本周亮点提炼</h3>
+<div class="space-y-6">
+<div class="relative pl-6 border-l-2 border-secondary/20">
+<div class="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-secondary"></div>
+<h4 class="text-sm font-bold text-on-surface mb-2">深度思考：模块化界面的未来</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                            在周三的记录中，你提出了一个关于“流动性 UI”的概念，这可能成为你下个项目的核心交互逻辑。
+                        </p>
+</div>
+<div class="relative pl-6 border-l-2 border-secondary/20">
+<div class="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-secondary/40"></div>
+<h4 class="text-sm font-bold text-on-surface mb-2">灵感迸发：跨学科笔记系统</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                            关联了建筑设计与软件架构的相似性，建议进一步探索层级结构。
+                        </p>
+</div>
+</div>
+</div>
+<div class="bg-secondary/5 p-4 flex justify-center">
+<button class="text-secondary text-xs font-bold uppercase tracking-widest hover:underline">查看所有 24 条想法</button>
+</div>
+</section>
+<!-- Action Buttons -->
+<footer class="flex gap-3 py-4">
+<button class="flex-1 text-white h-12 rounded-xl flex items-center justify-center gap-2 font-semibold shadow-lg shadow-secondary/20 transition-transform active:scale-95 bg-primary">
+<span class="material-symbols-outlined text-lg">ios_share</span>
+<span class="text-sm">分享周报</span>
+</button>
+<button class="w-12 h-12 bg-white text-secondary rounded-xl flex items-center justify-center border border-secondary/10 shadow-sm active:scale-95">
+<span class="material-symbols-outlined">download</span>
+</button>
+</footer>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-xl z-50 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.04)] border-t border-stone-100 dark:border-stone-800">
+<div class="flex justify-around items-center h-20 pb-safe px-4 w-full">
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-600 dark:hover:text-green-300 transition-all active:translate-y-[-2px] duration-200">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+<span class="font-['Inter'] font-medium text-[11px] tracking-wide">记录</span>
+</div>
+<div class="flex flex-col items-center justify-center text-green-700 dark:text-green-400 font-semibold hover:text-green-600 dark:hover:text-green-300 transition-all active:translate-y-[-2px] duration-200">
+<span class="material-symbols-outlined" data-icon="Timeline" style="font-variation-settings: 'FILL' 1;">timeline</span>
+<span class="font-['Inter'] font-medium text-[11px] tracking-wide">回顾</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-600 dark:hover:text-green-300 transition-all active:translate-y-[-2px] duration-200">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-['Inter'] font-medium text-[11px] tracking-wide">统计</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-600 dark:hover:text-green-300 transition-all active:translate-y-[-2px] duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] font-medium text-[11px] tracking-wide">设置</span>
+</div>
+</div>
+</nav>
+</body></html>

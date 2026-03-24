@@ -1,0 +1,120 @@
+<h2>安卓想法记录工具 - 技术方案选择</h2>
+<p class="subtitle">三种可行的技术实现方案，请选择最适合您的方案</p>
+
+<div class="cards">
+  <div class="card" data-choice="pwa" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px;">
+        <h3>PWA 方案</h3>
+        <p style="margin: 10px 0;">渐进式Web应用</p>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+          <div style="background: rgba(255,255,255,0.2); padding: 8px; border-radius: 4px; flex: 1;">HTML/CSS/JS</div>
+          <div style="background: rgba(255,255,255,0.2); padding: 8px; border-radius: 4px; flex: 1;">浏览器运行</div>
+          <div style="background: rgba(255,255,255,0.2); padding: 8px; border-radius: 4px; flex: 1;">添加到主屏</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>方案A: 渐进式Web应用 (PWA)</h3>
+      <p>使用HTML/CSS/JavaScript构建，在浏览器中运行，可添加到手机主屏幕</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>优点</h4>
+          <ul>
+            <li>最简单 - 仅需Web开发技能</li>
+            <li>跨平台 - 支持所有安卓手机</li>
+            <li>开发快速 - 无需安装开发环境</li>
+            <li>易于维护 - 单一代码库</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>缺点</h4>
+          <ul>
+            <li>功能受限 - 无法完全访问安卓原生API</li>
+            <li>性能一般 - 浏览器环境限制</li>
+            <li>离线功能有限</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-choice="flutter" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup" style="background: linear-gradient(135deg, #02569B 0%, #45D1F7 100%); color: white; padding: 20px; border-radius: 8px;">
+        <h3>Flutter 方案</h3>
+        <p style="margin: 10px 0;">跨平台原生应用</p>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+          <div style="background: rgba(255,255,255,0.2); padding: 8px; border-radius: 4px; flex: 1;">Dart语言</div>
+          <div style="background: rgba(255,255,255,0.2); padding: 8px; border-radius: 4px; flex: 1;">原生性能</div>
+          <div style="background: rgba(255,255,255,0.2); padding: 8px; border-radius: 4px; flex: 1;">安卓+iOS</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>方案B: Flutter跨平台应用</h3>
+      <p>使用Dart语言，一次编写可同时部署到安卓和iOS，性能接近原生</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>优点</h4>
+          <ul>
+            <li>性能优秀 - 接近原生应用</li>
+            <li>跨平台 - 同时支持安卓和iOS</li>
+            <li>UI丰富 - 提供丰富的组件库</li>
+            <li>热重载 - 快速开发调试</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>缺点</h4>
+          <ul>
+            <li>学习曲线 - 需要学习Dart语言</li>
+            <li>开发环境 - 需要安装Flutter SDK</li>
+            <li>应用体积较大</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-choice="native" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup" style="background: linear-gradient(135deg, #3DDC84 0%, #00A86B 100%); color: white; padding: 20px; border-radius: 8px;">
+        <h3>原生方案</h3>
+        <p style="margin: 10px 0;">Kotlin/Java原生开发</p>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+          <div style="background: rgba(255,255,255,0.2); padding: 8px; border-radius: 4px; flex: 1;">Kotlin</div>
+          <div style="background: rgba(255,255,255,0.2); padding: 8px; border-radius: 4px; flex: 1;">最佳性能</div>
+          <div style="background: rgba(255,255,255,0.2); padding: 8px; border-radius: 4px; flex: 1;">全功能</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>方案C: 原生Android开发</h3>
+      <p>使用Kotlin或Java，完全原生的安卓应用，最佳性能和功能支持</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>优点</h4>
+          <ul>
+            <li>最佳性能 - 完全原生体验</li>
+            <li>完整功能 - 访问所有安卓API</li>
+            <li>最佳兼容性 - 所有安卓版本</li>
+            <li>社区支持 - 丰富的学习资源</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>缺点</h4>
+          <ul>
+            <li>学习成本高 - 需要学习安卓开发</li>
+            <li>开发环境复杂 - Android Studio等</li>
+            <li>仅支持安卓平台</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>推荐方案</h3>
+  <p><strong>方案A: PWA</strong> - 鉴于您无安卓开发经验，PWA是最简单的选择。使用HTML/CSS/JavaScript，您可以在几周内完成基础版本，无需复杂的开发环境。虽然功能有限，但足以满足想法记录、Markdown编辑、图片压缩、标签分类、按周回顾和热力图等核心需求。</p>
+</div>
