@@ -24,38 +24,81 @@
     </header>
 
     <main class="main-content">
-        <!-- 快速记录区 -->
-        <section class="quick-entry">
-            <textarea id="quick-entry" placeholder="捕捉此刻的想法..."></textarea>
-            <div class="quick-actions">
-                <div class="format-buttons">
-                    <button aria-label="Markdown格式">
-                        <span class="material-symbols-outlined">markdown</span>
-                    </button>
-                    <button aria-label="插入图片">
-                        <span class="material-symbols-outlined">image</span>
-                    </button>
+        <!-- 记录视图 -->
+        <section id="record-section" class="view-section">
+            <!-- 快速记录区 -->
+            <div class="quick-entry">
+                <textarea id="quick-entry" placeholder="捕捉此刻的想法..."></textarea>
+                <div class="quick-actions">
+                    <div class="format-buttons">
+                        <button aria-label="Markdown格式">
+                            <span class="material-symbols-outlined">markdown</span>
+                        </button>
+                        <button aria-label="插入图片">
+                            <span class="material-symbols-outlined">image</span>
+                        </button>
+                    </div>
+                    <button id="publish-btn" class="primary">发布</button>
                 </div>
-                <button id="publish-btn" class="primary">发布</button>
+            </div>
+
+            <!-- 标签筛选区 -->
+            <div class="tag-filter">
+                <div class="tag-scroll">
+                    <button class="tag-chip active" data-tag="all">全部</button>
+                    <button class="tag-chip" data-tag="work">工作</button>
+                    <button class="tag-chip" data-tag="life">生活</button>
+                    <button class="tag-chip" data-tag="study">学习</button>
+                    <button class="tag-chip" data-tag="travel">旅行</button>
+                    <button class="tag-chip" data-tag="inspiration">灵感</button>
+                </div>
+            </div>
+
+            <!-- 想法列表 -->
+            <div class="idea-list">
+                <div id="ideas-container">
+                    <!-- 想法卡片将通过JavaScript动态生成 -->
+                </div>
             </div>
         </section>
-        
-        <!-- 标签筛选区 -->
-        <section class="tag-filter">
-            <div class="tag-scroll">
-                <button class="tag-chip active" data-tag="all">全部</button>
-                <button class="tag-chip" data-tag="work">工作</button>
-                <button class="tag-chip" data-tag="life">生活</button>
-                <button class="tag-chip" data-tag="study">学习</button>
-                <button class="tag-chip" data-tag="travel">旅行</button>
-                <button class="tag-chip" data-tag="inspiration">灵感</button>
+
+        <!-- 回顾视图 -->
+        <section id="review-section" class="view-section" style="display: none;">
+            <div id="weekly-report-container">
+                <!-- 周报内容将通过JavaScript动态生成 -->
             </div>
         </section>
-        
-        <!-- 想法列表 -->
-        <section class="idea-list">
-            <div id="ideas-container">
-                <!-- 想法卡片将通过JavaScript动态生成 -->
+
+        <!-- 统计视图 -->
+        <section id="stats-section" class="view-section" style="display: none;">
+            <div class="stats-container">
+                <h2>记录统计</h2>
+                <div class="stats-summary">
+                    <div class="stat-item">
+                        <div class="stat-value" id="total-ideas">0</div>
+                        <div class="stat-label">总想法数</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="weekly-ideas">0</div>
+                        <div class="stat-label">本周想法</div>
+                    </div>
+                </div>
+                <div class="heatmap-container">
+                    <canvas id="heatmap-canvas"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 设置视图 -->
+        <section id="settings-section" class="view-section" style="display: none;">
+            <div class="settings-container">
+                <h2>设置</h2>
+                <div class="setting-group">
+                    <h3>数据管理</h3>
+                    <button class="setting-btn" id="export-json">导出JSON</button>
+                    <button class="setting-btn" id="export-markdown">导出Markdown</button>
+                    <button class="setting-btn" id="import-data">导入数据</button>
+                </div>
             </div>
         </section>
     </main>

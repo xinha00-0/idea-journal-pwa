@@ -62,4 +62,30 @@ export class TagManager {
       .sort((a, b) => (b.count || 0) - (a.count || 0) || (a.name || '').localeCompare(b.name || ''))
       .slice(0, limit);
   }
+
+  async loadPopularTags(limit = 10) {
+    const tags = await this.getPopularTags(limit);
+    this.updateTagChips(tags);
+    return tags;
+  }
+
+  updateTagChips(tags) {
+    const tagFilter = document.querySelector('.tag-scroll');
+    if (!tagFilter) return;
+
+    const allChip = tagFilter.querySelector('.tag-chip[data-tag="all"]');
+    tagFilter.innerHTML = '';
+
+    if (allChip) {
+      tagFilter.appendChild(allChip);
+    }
+
+    tags.forEach(tag => {
+      const chip = document.createElement('button');
+      chip.className = 'tag-chip';
+      chip.dataset.tag = tag.name || tag.id;
+      chip.textContent = tag.name || tag.id;
+      tagFilter.appendChild(chip);
+    });
+  }
 }

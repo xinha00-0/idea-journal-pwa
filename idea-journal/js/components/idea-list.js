@@ -96,4 +96,16 @@ export class IdeaList {
     if (content.length <= maxLength) return content;
     return content.substring(0, maxLength) + '...';
   }
+
+  filterByTag(tag) {
+    const allIdeas = [...this.ideas];
+    if (tag === 'all') {
+      this.ideas = allIdeas;
+    } else {
+      this.ideas = allIdeas.filter(idea =>
+        idea.tags && idea.tags.includes(tag)
+      );
+    }
+    this.render();
+  }
 }
