@@ -22,25 +22,58 @@ export class IdeaList {
     const card = document.createElement('article');
     card.className = 'idea-card';
     card.dataset.id = idea.id;
-    
-    card.innerHTML = `
-      <div class="card-header">
-        <h2 class="card-title">${idea.title}</h2>
-        <time class="card-time">${this.formatTime(idea.created)}</time>
-      </div>
-      <div class="card-content">
-        <p>${this.truncateContent(idea.content, 100)}</p>
-      </div>
-      <div class="card-footer">
-        <div class="card-tags">
-          ${idea.tags.map(tag => `<span class="tag-chip">${tag}</span>`).join('')}
-        </div>
-        <button class="card-menu" aria-label="更多选项">
-          <span class="material-symbols-outlined">more_horiz</span>
-        </button>
-      </div>
-    `;
-    
+
+    const header = document.createElement('div');
+    header.className = 'card-header';
+
+    const title = document.createElement('h2');
+    title.className = 'card-title';
+    title.textContent = idea.title;
+    header.appendChild(title);
+
+    const time = document.createElement('time');
+    time.className = 'card-time';
+    time.textContent = this.formatTime(idea.created);
+    header.appendChild(time);
+
+    card.appendChild(header);
+
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'card-content';
+
+    const p = document.createElement('p');
+    p.textContent = this.truncateContent(idea.content, 100);
+    contentDiv.appendChild(p);
+
+    card.appendChild(contentDiv);
+
+    const footer = document.createElement('div');
+    footer.className = 'card-footer';
+
+    const tagsDiv = document.createElement('div');
+    tagsDiv.className = 'card-tags';
+
+    idea.tags.forEach(tag => {
+      const tagSpan = document.createElement('span');
+      tagSpan.className = 'tag-chip';
+      tagSpan.textContent = tag;
+      tagsDiv.appendChild(tagSpan);
+    });
+
+    footer.appendChild(tagsDiv);
+
+    const menuBtn = document.createElement('button');
+    menuBtn.className = 'card-menu';
+    menuBtn.setAttribute('aria-label', '更多选项');
+
+    const icon = document.createElement('span');
+    icon.className = 'material-symbols-outlined';
+    icon.textContent = 'more_horiz';
+    menuBtn.appendChild(icon);
+
+    footer.appendChild(menuBtn);
+    card.appendChild(footer);
+
     return card;
   }
   
