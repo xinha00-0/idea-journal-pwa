@@ -5,7 +5,13 @@
   "main": "js/app.js",
   "type": "module",
   "scripts": {
-    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest"
+    "dev": "npx serve . -p 3000",
+    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest",
+    "test:unit": "npx jest tests/unit",
+    "test:integration": "npx jest tests/integration",
+    "test:e2e": "set NODE_OPTIONS=--experimental-vm-modules && npx jest tests/e2e",
+    "build": "npx html-minifier --collapse-whitespace --remove-comments *.html -o dist/",
+    "serve": "npx serve dist -p 3000"
   },
   "keywords": [
     "idea",
@@ -17,6 +23,8 @@
   "devDependencies": {
     "fake-indexeddb": "^6.2.5",
     "jest": "^29.7.0",
-    "jest-environment-jsdom": "^30.3.0"
+    "jest-environment-jsdom": "^30.3.0",
+    "serve": "^14.0.0",
+    "html-minifier": "^4.0.0"
   }
 }
