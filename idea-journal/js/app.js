@@ -8,6 +8,9 @@ import { DataExporter } from './storage/export.js';
 import { DataImporter } from './storage/import.js';
 import { HeatmapChart } from './components/heatmap.js';
 import { WeeklyReport } from './components/weekly-report.js';
+import { ThemeManager } from './features/theme-manager.js';
+import { DataManager } from './features/data-manager.js';
+import { SettingsComponent } from './components/settings.js';
 
 class IdeaJournalApp {
   constructor() {
@@ -20,6 +23,9 @@ class IdeaJournalApp {
     this.exporter = null;
     this.importer = null;
     this.heatmap = null;
+    this.themeManager = null;
+    this.dataManager = null;
+    this.settings = null;
   }
 
   async init() {
@@ -50,6 +56,13 @@ class IdeaJournalApp {
       this.heatmap = new HeatmapChart('heatmap-canvas', {
         colorScheme: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39']
       });
+
+      this.themeManager = new ThemeManager();
+      this.themeManager.applyTheme();
+      this.themeManager.watchSystemTheme();
+
+      this.dataManager = new DataManager(this.database);
+      this.settings = new SettingsComponent('settings-container', this.themeManager, this.dataManager);
 
       this.bindEvents();
       this.registerServiceWorker();
@@ -190,6 +203,10 @@ class IdeaJournalApp {
       this.loadWeeklyReport();
     } else if (hash === 'stats') {
       this.loadStatistics();
+    } else if (hash === 'settings') {
+      if (this.settings) {
+        this.settings.loadSettings();
+      }
     }
   }
 
