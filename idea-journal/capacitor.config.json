@@ -1,0 +1,25 @@
+{
+  "appId": "com.ideajournal.app",
+  "appName": "想法记录",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0,
+      "launchAutoHide": true,
+      "backgroundColor": "#006e1c",
+      "androidSplashResourceName": "splash",
+      "androidScaleType": "CENTER_CROP",
+      "androidSpinnerStyle": "large",
+      "iosSpinnerStyle": "small",
+      "spinnerColor": "#ffffff",
+      "showSpinner": true,
+      "androidSplashResourceName": "splash",
+      "androidScaleType": "CENTER_CROP",
+      "launchShowDuration": 3000
+    }
+  }
+}

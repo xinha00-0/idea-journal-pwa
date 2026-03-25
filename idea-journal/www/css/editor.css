@@ -1,0 +1,36 @@
+.easy-mde-container {
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.EasyMDEContainer .CodeMirror {
+  border: none;
+  padding: 16px;
+  font-size: 16px;
+  line-height: 1.6;
+  font-family: 'Inter', sans-serif;
+}
+
+.EasyMDEContainer .editor-toolbar {
+  border: none;
+  background: transparent;
+  padding: 8px;
+}
+
+.EasyMDEContainer .editor-toolbar button {
+  color: #3f4a3c;
+  border: none;
+  border-radius: 4px;
+}
+
+.EasyMDEContainer .editor-toolbar button:hover {
+  background: #f6f3f2;
+}
+
+.EasyMDEContainer .editor-statusbar {
+  border: none;
+  padding: 8px;
+  font-size: 12px;
+  color: #3f4a3c;
+}
