@@ -7,8 +7,8 @@
   "scripts": {
     "dev": "npx serve . -p 3000",
     "test": "set NODE_OPTIONS=--experimental-vm-modules && jest",
-    "test:unit": "npx jest tests/unit",
-    "test:integration": "npx jest tests/integration",
+    "test:unit": "set NODE_OPTIONS=--experimental-vm-modules && npx jest tests/unit",
+    "test:integration": "set NODE_OPTIONS=--experimental-vm-modules && npx jest tests/integration",
     "test:e2e": "set NODE_OPTIONS=--experimental-vm-modules && npx jest tests/e2e",
     "build": "npx html-minifier --collapse-whitespace --remove-comments *.html -o dist/",
     "serve": "npx serve dist -p 3000"
