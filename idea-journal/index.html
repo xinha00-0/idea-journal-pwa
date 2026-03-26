@@ -6,28 +6,26 @@
     <title>想法记录</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/editor.css">
 </head>
 <body>
-    <header class="top-bar">
-        <div class="container">
-            <h1>想法记录</h1>
-            <div class="actions">
-                <button id="search-btn" aria-label="搜索">
-                    <span class="material-symbols-outlined">search</span>
-                </button>
-                <button id="add-btn" class="primary" aria-label="新增想法">
-                    <span class="material-symbols-outlined">add</span>
-                </button>
+    <div id="app">
+        <header class="top-bar">
+            <div class="container">
+                <h1>想法记录</h1>
+                <div class="actions">
+                    <button id="search-btn" aria-label="搜索">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
+                    <button id="add-btn" class="primary" aria-label="新增想法">
+                        <span class="material-symbols-outlined">add</span>
+                    </button>
+                </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <main class="main-content">
-        <!-- 记录视图 -->
-        <section id="record-section" class="view-section">
+        <main class="main-content">
             <!-- 快速记录区 -->
-            <div class="quick-entry">
+            <section class="quick-entry">
                 <textarea id="quick-entry" placeholder="捕捉此刻的想法..."></textarea>
                 <div class="quick-actions">
                     <div class="format-buttons">
@@ -40,10 +38,10 @@
                     </div>
                     <button id="publish-btn" class="primary">发布</button>
                 </div>
-            </div>
-
+            </section>
+            
             <!-- 标签筛选区 -->
-            <div class="tag-filter">
+            <section class="tag-filter">
                 <div class="tag-scroll">
                     <button class="tag-chip active" data-tag="all">全部</button>
                     <button class="tag-chip" data-tag="work">工作</button>
@@ -52,72 +50,36 @@
                     <button class="tag-chip" data-tag="travel">旅行</button>
                     <button class="tag-chip" data-tag="inspiration">灵感</button>
                 </div>
-            </div>
-
+            </section>
+            
             <!-- 想法列表 -->
-            <div class="idea-list">
+            <section class="idea-list">
                 <div id="ideas-container">
                     <!-- 想法卡片将通过JavaScript动态生成 -->
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
 
-        <!-- 回顾视图 -->
-        <section id="review-section" class="view-section" style="display: none;">
-            <div id="weekly-report-container">
-                <!-- 周报内容将通过JavaScript动态生成 -->
-            </div>
-        </section>
-
-        <!-- 统计视图 -->
-        <section id="stats-section" class="view-section" style="display: none;">
-            <div class="stats-container">
-                <h2>记录统计</h2>
-                <div class="stats-summary">
-                    <div class="stat-item">
-                        <div class="stat-value" id="total-ideas">0</div>
-                        <div class="stat-label">总想法数</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="weekly-ideas">0</div>
-                        <div class="stat-label">本周想法</div>
-                    </div>
-                </div>
-                <div class="heatmap-container">
-                    <canvas id="heatmap-canvas"></canvas>
-                </div>
-            </div>
-        </section>
-
-        <!-- 设置视图 -->
-        <section id="settings-section" class="view-section" style="display: none;">
-            <div id="settings-container">
-                <!-- 设置内容将通过JavaScript动态生成 -->
-            </div>
-        </section>
-    </main>
-
-    <!-- 底部导航 -->
-    <nav class="bottom-nav">
-        <a href="#record" class="nav-item active">
-            <span class="material-symbols-outlined">edit_note</span>
-            <span>记录</span>
-        </a>
-        <a href="#review" class="nav-item">
-            <span class="material-symbols-outlined">timeline</span>
-            <span>回顾</span>
-        </a>
-        <a href="#stats" class="nav-item">
-            <span class="material-symbols-outlined">analytics</span>
-            <span>统计</span>
-        </a>
-        <a href="#settings" class="nav-item">
-            <span class="material-symbols-outlined">settings</span>
-            <span>设置</span>
-        </a>
-    </nav>
-
-    <script src="js/libs/easymde.min.js"></script>
+        <!-- 底部导航 -->
+        <nav class="bottom-nav">
+            <a href="#record" class="nav-item active">
+                <span class="material-symbols-outlined">edit_note</span>
+                <span>记录</span>
+            </a>
+            <a href="#review" class="nav-item">
+                <span class="material-symbols-outlined">timeline</span>
+                <span>回顾</span>
+            </a>
+            <a href="#stats" class="nav-item">
+                <span class="material-symbols-outlined">analytics</span>
+                <span>统计</span>
+            </a>
+            <a href="#settings" class="nav-item">
+                <span class="material-symbols-outlined">settings</span>
+                <span>设置</span>
+            </a>
+        </nav>
+    </div>
     <script src="js/app.js" type="module"></script>
 </body>
 </html>
