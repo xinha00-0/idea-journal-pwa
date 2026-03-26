@@ -1,85 +1,86 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>想法记录</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>想法记录</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-    <div id="app">
-        <header class="top-bar">
-            <div class="container">
-                <h1>想法记录</h1>
-                <div class="actions">
-                    <button id="search-btn" aria-label="搜索">
-                        <span class="material-symbols-outlined">search</span>
-                    </button>
-                    <button id="add-btn" class="primary" aria-label="新增想法">
-                        <span class="material-symbols-outlined">add</span>
-                    </button>
-                </div>
-            </div>
-        </header>
+<div id="app">
+<header class="top-bar">
+<div class="container">
+<h1>想法记录</h1>
+<div class="actions">
+<button id="search-btn" aria-label="搜索">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button id="add-btn" class="primary" aria-label="新增想法">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</header>
 
-        <main class="main-content">
-            <!-- 快速记录区 -->
-            <section class="quick-entry">
-                <textarea id="quick-entry" placeholder="捕捉此刻的想法..."></textarea>
-                <div class="quick-actions">
-                    <div class="format-buttons">
-                        <button aria-label="Markdown格式">
-                            <span class="material-symbols-outlined">markdown</span>
-                        </button>
-                        <button aria-label="插入图片">
-                            <span class="material-symbols-outlined">image</span>
-                        </button>
-                    </div>
-                    <button id="publish-btn" class="primary">发布</button>
-                </div>
-            </section>
-            
-            <!-- 标签筛选区 -->
-            <section class="tag-filter">
-                <div class="tag-scroll">
-                    <button class="tag-chip active" data-tag="all">全部</button>
-                    <button class="tag-chip" data-tag="work">工作</button>
-                    <button class="tag-chip" data-tag="life">生活</button>
-                    <button class="tag-chip" data-tag="study">学习</button>
-                    <button class="tag-chip" data-tag="travel">旅行</button>
-                    <button class="tag-chip" data-tag="inspiration">灵感</button>
-                </div>
-            </section>
-            
-            <!-- 想法列表 -->
-            <section class="idea-list">
-                <div id="ideas-container">
-                    <!-- 想法卡片将通过JavaScript动态生成 -->
-                </div>
-            </section>
-        </main>
+<main class="main-content">
+<!-- 快速记录区 -->
+<section class="quick-entry">
+<textarea id="quick-entry" placeholder="捕捉此刻的想法..."></textarea>
+<div class="quick-actions">
+<div class="format-buttons">
+<button aria-label="Markdown格式">
+<span class="material-symbols-outlined">markdown</span>
+</button>
+<button aria-label="插入图片">
+<span class="material-symbols-outlined">image</span>
+</button>
+</div>
+<button id="publish-btn" class="primary">发布</button>
+</div>
+</section>
 
-        <!-- 底部导航 -->
-        <nav class="bottom-nav">
-            <a href="#record" class="nav-item active">
-                <span class="material-symbols-outlined">edit_note</span>
-                <span>记录</span>
-            </a>
-            <a href="#review" class="nav-item">
-                <span class="material-symbols-outlined">timeline</span>
-                <span>回顾</span>
-            </a>
-            <a href="#stats" class="nav-item">
-                <span class="material-symbols-outlined">analytics</span>
-                <span>统计</span>
-            </a>
-            <a href="#settings" class="nav-item">
-                <span class="material-symbols-outlined">settings</span>
-                <span>设置</span>
-            </a>
-        </nav>
-    </div>
-    <script src="js/app.js" type="module"></script>
+<!-- 标签筛选区 -->
+<section class="tag-filter">
+<div class="tag-scroll">
+<button class="tag-chip active" data-tag="all">全部</button>
+<button class="tag-chip" data-tag="work">工作</button>
+<button class="tag-chip" data-tag="life">生活</button>
+<button class="tag-chip" data-tag="study">学习</button>
+<button class="tag-chip" data-tag="travel">旅行</button>
+<button class="tag-chip" data-tag="inspiration">灵感</button>
+</div>
+</section>
+
+<!-- 想法列表 -->
+<section class="idea-list">
+<div id="ideas-container">
+<!-- 想法卡片将通过JavaScript动态生成 -->
+</div>
+</section>
+</main>
+
+<!-- 底部导航 -->
+<nav class="bottom-nav">
+<a href="#record" class="nav-item active">
+<span class="material-symbols-outlined">edit_note</span>
+<span>记录</span>
+</a>
+<a href="#review" class="nav-item">
+<span class="material-symbols-outlined">timeline</span>
+<span>回顾</span>
+</a>
+<a href="#stats" class="nav-item">
+<span class="material-symbols-outlined">analytics</span>
+<span>统计</span>
+</a>
+<a href="#settings" class="nav-item">
+<span class="material-symbols-outlined">settings</span>
+<span>设置</span>
+</a>
+</nav>
+</div>
+<script src="js/app.js" type="module"></script>
 </body>
 </html>
