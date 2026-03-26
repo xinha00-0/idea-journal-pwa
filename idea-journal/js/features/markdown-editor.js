@@ -1,14 +1,6 @@
 export class MarkdownEditor {
   constructor(elementId, options = {}) {
     this.element = document.getElementById(elementId);
-    if (!this.element) {
-      throw new Error(`Element with id '${elementId}' not found`);
-    }
-    
-    if (typeof EasyMDE === 'undefined') {
-      throw new Error('EasyMDE is not loaded. Please include easymde.min.js in your HTML.');
-    }
-    
     this.options = {
       spellChecker: false,
       autofocus: true,
@@ -28,14 +20,23 @@ export class MarkdownEditor {
   }
   
   init() {
-    this.instance = new EasyMDE({
-      element: this.element,
-      ...this.options
-    });
+    this.instance = new EasyMDE(this.options);
     
+    // 监听内容变化
     this.instance.codemirror.on('change', () => {
       this.onContentChange?.(this.getContent());
+      // 自动保存草稿（防抖）
+      clearTimeout(this.autoSaveTimer);
+      this.autoSaveTimer = setTimeout(() => {
+        this.autoSaveDraft();
+      }, 1000);
     });
+    
+    // 加载草稿
+    const draft = this.loadDraft();
+    if (draft) {
+      this.setContent(draft);
+    }
   }
   
   getContent() {
@@ -67,10 +68,12 @@ export class MarkdownEditor {
     this.instance = null;
   }
   
+  // 事件处理器
   setOnContentChange(callback) {
     this.onContentChange = callback;
   }
   
+  // 自动保存草稿
   autoSaveDraft() {
     const content = this.getContent();
     if (content.trim()) {
@@ -86,6 +89,7 @@ export class MarkdownEditor {
     if (draft) {
       const { content, timestamp } = JSON.parse(draft);
       const draftAge = Date.now() - new Date(timestamp).getTime();
+      // 草稿保留24小时
       if (draftAge < 24 * 60 * 60 * 1000) {
         return content;
       } else {

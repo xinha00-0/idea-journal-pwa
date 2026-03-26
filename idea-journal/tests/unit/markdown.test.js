@@ -2,43 +2,11 @@ import { MarkdownEditor } from '../../js/features/markdown-editor.js';
 
 describe('MarkdownEditor', () => {
   let editor;
-  let mockEasyMDE;
-  let mockCodeMirror;
-  let currentValue = '';
   
   beforeEach(() => {
+    // 创建DOM元素
     document.body.innerHTML = '<textarea id="editor"></textarea>';
-    currentValue = '';
-    
-    const mockFn = () => {
-      const fn = function() { return mockEasyMDE; };
-      fn.mockImpl = () => {};
-      return fn;
-    };
-    
-    mockCodeMirror = {
-      getDoc: () => ({
-        getCursor: () => ({ line: 0, ch: 0 }),
-        replaceRange: (text) => { currentValue += text; }
-      }),
-      on: mockFn()
-    };
-    
-    mockEasyMDE = {
-      value: function(val) { 
-        if (val !== undefined) { currentValue = val; }
-        return currentValue; 
-      },
-      codemirror: mockCodeMirror,
-      toTextArea: mockFn()
-    };
-    
-    global.EasyMDE = mockFn();
     editor = new MarkdownEditor('editor');
-  });
-  
-  afterEach(() => {
-    document.body.innerHTML = '';
   });
   
   test('应该初始化编辑器', () => {
