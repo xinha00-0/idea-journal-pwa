@@ -167,74 +167,74 @@ export class IdeaDatabase {
       const transaction = this.db.transaction(['categories'], 'readwrite');
       const store = transaction.objectStore('categories');
       const request = store.clear();
-      
+
       request.onsuccess = () => resolve();
       request.onerror = () => reject(request.error);
     });
   }
-  
+
   // 标签表CRUD操作
   async addTag(tag) {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction(['tags'], 'readwrite');
       const store = transaction.objectStore('tags');
       const request = store.add(tag);
-      
+
       request.onsuccess = () => resolve(request.result);
       request.onerror = () => reject(request.error);
     });
   }
-  
+
   async getTag(id) {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction(['tags'], 'readonly');
       const store = transaction.objectStore('tags');
       const request = store.get(id);
-      
+
       request.onsuccess = () => resolve(request.result);
       request.onerror = () => reject(request.error);
     });
   }
-  
+
   async getAllTags() {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction(['tags'], 'readonly');
       const store = transaction.objectStore('tags');
       const request = store.getAll();
-      
+
       request.onsuccess = () => resolve(request.result);
       request.onerror = () => reject(request.error);
     });
   }
-  
+
   async updateTag(tag) {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction(['tags'], 'readwrite');
       const store = transaction.objectStore('tags');
       const request = store.put(tag);
-      
+
       request.onsuccess = () => resolve(request.result);
       request.onerror = () => reject(request.error);
     });
   }
-  
+
   async deleteTag(id) {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction(['tags'], 'readwrite');
       const store = transaction.objectStore('tags');
       const request = store.delete(id);
-      
+
       request.onsuccess = () => resolve();
       request.onerror = () => reject(request.error);
     });
   }
-  
+
   async clearTags() {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction(['tags'], 'readwrite');
       const store = transaction.objectStore('tags');
       const request = store.clear();
-      
+
       request.onsuccess = () => resolve();
       request.onerror = () => reject(request.error);
     });

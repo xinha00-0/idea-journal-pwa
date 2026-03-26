@@ -105,49 +105,49 @@ describe('IdeaDatabase', () => {
   test('应该删除分类', async () => {
     const id = await db.addCategory({ name: '要删除的分类', order: 1 });
     await db.deleteCategory(id);
-    
+
     const category = await db.getCategory(id);
     expect(category).toBeUndefined();
   });
-  
+
   // 标签CRUD测试
   test('应该添加标签', async () => {
-    const tag = { name: '测试标签' };
+    const tag = { name: '重要' };
     const id = await db.addTag(tag);
     expect(id).toBeDefined();
-    
+
     const savedTag = await db.getTag(id);
-    expect(savedTag.name).toBe('测试标签');
+    expect(savedTag.name).toBe('重要');
   });
-  
+
   test('应该获取所有标签', async () => {
     await db.addTag({ name: '标签1' });
     await db.addTag({ name: '标签2' });
-    
+
     const tags = await db.getAllTags();
     expect(tags.length).toBe(2);
   });
-  
+
   test('应该更新标签', async () => {
-    const id = await db.addTag({ name: '旧名称' });
-    await db.updateTag({ id, name: '新名称' });
-    
+    const id = await db.addTag({ name: '旧标签' });
+    await db.updateTag({ id, name: '新标签' });
+
     const tag = await db.getTag(id);
-    expect(tag.name).toBe('新名称');
+    expect(tag.name).toBe('新标签');
   });
-  
+
   test('应该删除标签', async () => {
     const id = await db.addTag({ name: '要删除的标签' });
     await db.deleteTag(id);
-    
+
     const tag = await db.getTag(id);
     expect(tag).toBeUndefined();
   });
-  
+
   test('应该清空所有标签', async () => {
     await db.addTag({ name: '标签1' });
     await db.addTag({ name: '标签2' });
-    
+
     await db.clearTags();
     const tags = await db.getAllTags();
     expect(tags.length).toBe(0);
