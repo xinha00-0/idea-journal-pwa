@@ -129,7 +129,7 @@ export class IdeaList {
   async deleteIdea(id) {
     const { IdeaDatabase } = await import('../storage/database.js');
     if (this.database) {
-      await this.database.deleteIdea(id);
+      await this.database.deleteIdea(Number(id));
       await this.loadIdeas(this.database);
     }
   }
