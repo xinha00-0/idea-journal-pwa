@@ -2,8 +2,8 @@
   "name": "想法记录",
   "short_name": "记录",
   "description": "捕捉灵感和想法的记录工具",
-  "start_url": "/index.html",
-  "scope": "/",
+  "start_url": "/idea-journal-pwa/index.html",
+  "scope": "/idea-journal-pwa/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fbf9f8",
@@ -60,7 +60,7 @@
       "name": "新建想法",
       "short_name": "新建",
       "description": "快速创建新想法",
-      "url": "/index.html#record",
+      "url": "/idea-journal-pwa/index.html#record",
       "icons": [{ "src": "assets/icons/icon-96.png", "sizes": "96x96" }]
     }
   ]
