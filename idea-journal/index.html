@@ -6,13 +6,15 @@
 <title>想法记录</title>
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/editor.css">
+<link rel="stylesheet" href="css/easymde.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
 <div id="app">
 <header class="top-bar">
 <div class="container">
-<h1>想法记录</h1>
+<h1 id="page-title">想法记录</h1>
 <div class="actions">
 <button id="search-btn" aria-label="搜索">
 <span class="material-symbols-outlined">search</span>
@@ -25,41 +27,175 @@
 </header>
 
 <main class="main-content">
-<!-- 快速记录区 -->
-<section class="quick-entry">
+
+<!-- ========== 记录视图 ========== -->
+<section id="view-record" class="view active">
+<div class="quick-entry">
 <textarea id="quick-entry" placeholder="捕捉此刻的想法..."></textarea>
 <div class="quick-actions">
 <div class="format-buttons">
-<button aria-label="Markdown格式">
+<button id="markdown-btn" aria-label="Markdown格式">
 <span class="material-symbols-outlined">markdown</span>
 </button>
-<button aria-label="插入图片">
+<button id="image-btn" aria-label="插入图片">
 <span class="material-symbols-outlined">image</span>
 </button>
+<input type="file" id="image-input" accept="image/*" style="display:none" />
 </div>
 <button id="publish-btn" class="primary">发布</button>
 </div>
-</section>
+</div>
 
-<!-- 标签筛选区 -->
 <section class="tag-filter">
-<div class="tag-scroll">
+<div class="tag-scroll" id="tag-scroll">
 <button class="tag-chip active" data-tag="all">全部</button>
-<button class="tag-chip" data-tag="work">工作</button>
-<button class="tag-chip" data-tag="life">生活</button>
-<button class="tag-chip" data-tag="study">学习</button>
-<button class="tag-chip" data-tag="travel">旅行</button>
-<button class="tag-chip" data-tag="inspiration">灵感</button>
 </div>
 </section>
 
-<!-- 想法列表 -->
 <section class="idea-list">
-<div id="ideas-container">
-<!-- 想法卡片将通过JavaScript动态生成 -->
+<div id="ideas-container"></div>
+</section>
+</section>
+
+<!-- ========== 编辑视图 ========== -->
+<section id="view-editor" class="view">
+<div class="editor-header">
+<button id="editor-back-btn" class="icon-btn" aria-label="返回">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<input type="text" id="editor-title" placeholder="标题" class="editor-title-input" />
+<button id="editor-save-btn" class="primary">保存</button>
+</div>
+<div class="editor-container">
+<textarea id="editor-content"></textarea>
+</div>
+<div class="editor-footer">
+<div id="editor-tags" class="editor-tag-area">
+<span class="editor-tag-label">标签：</span>
+<div id="editor-tag-chips" class="editor-tag-chips"></div>
+<button id="editor-add-tag-btn" class="icon-btn small" aria-label="添加标签">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<div class="draft-indicator" id="draft-indicator"></div>
 </div>
 </section>
+
+<!-- ========== 回顾视图 ========== -->
+<section id="view-review" class="view">
+<div class="review-header">
+<button id="review-prev" class="icon-btn" aria-label="上一周">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="review-date-range">
+<time id="review-start"></time>
+<span> — </span>
+<time id="review-end"></time>
+</div>
+<button id="review-next" class="icon-btn" aria-label="下一周">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div id="weekly-report-container"></div>
+</section>
+
+<!-- ========== 统计视图 ========== -->
+<section id="view-stats" class="view">
+<div class="stats-summary" id="stats-summary">
+<div class="stat-item">
+<span class="stat-value" id="stat-total">0</span>
+<span class="stat-label">总想法</span>
+</div>
+<div class="stat-item">
+<span class="stat-value" id="stat-streak">0</span>
+<span class="stat-label">连续天数</span>
+</div>
+<div class="stat-item">
+<span class="stat-value" id="stat-avg">0</span>
+<span class="stat-label">日均</span>
+</div>
+</div>
+<div class="heatmap-container">
+<h3>活跃度</h3>
+<canvas id="heatmap-canvas"></canvas>
+</div>
+<div class="tag-distribution" id="tag-distribution">
+<h3>标签分布</h3>
+<div id="tag-dist-chart" class="tag-dist-bars"></div>
+</div>
+</section>
+
+<!-- ========== 设置视图 ========== -->
+<section id="view-settings" class="view">
+<div class="settings-section">
+<h3>数据管理</h3>
+<div class="settings-item">
+<span>导出数据</span>
+<button id="export-json-btn" class="settings-btn">JSON</button>
+<button id="export-md-btn" class="settings-btn">Markdown</button>
+</div>
+<div class="settings-item">
+<span>导入数据</span>
+<button id="import-btn" class="settings-btn">选择文件</button>
+<input type="file" id="import-input" accept=".json,.md,.markdown" style="display:none" />
+</div>
+<div class="settings-item">
+<span>清空所有数据</span>
+<button id="clear-data-btn" class="settings-btn danger">清空</button>
+</div>
+</div>
+<div class="settings-section">
+<h3>关于</h3>
+<div class="settings-item">
+<span>版本</span>
+<span class="settings-value">1.0.0</span>
+</div>
+<div class="settings-item">
+<span>离线支持</span>
+<span class="settings-value" id="offline-status">检测中...</span>
+</div>
+</div>
+</section>
+
 </main>
+
+<!-- 搜索面板 -->
+<div id="search-panel" class="search-panel hidden">
+<div class="search-header">
+<input type="text" id="search-input" placeholder="搜索想法..." />
+<button id="search-close-btn" class="icon-btn" aria-label="关闭搜索">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div id="search-results" class="search-results"></div>
+</div>
+
+<!-- 标签添加对话框 -->
+<div id="tag-dialog" class="dialog hidden">
+<div class="dialog-content">
+<h3>添加标签</h3>
+<div id="tag-dialog-list" class="tag-dialog-list"></div>
+<div class="dialog-input-row">
+<input type="text" id="tag-dialog-input" placeholder="新标签名" />
+<button id="tag-dialog-add-btn" class="primary">添加</button>
+</div>
+<div class="dialog-actions">
+<button id="tag-dialog-cancel-btn" class="settings-btn">取消</button>
+<button id="tag-dialog-confirm-btn" class="primary">确定</button>
+</div>
+</div>
+</div>
+
+<!-- 确认对话框 -->
+<div id="confirm-dialog" class="dialog hidden">
+<div class="dialog-content">
+<p id="confirm-message"></p>
+<div class="dialog-actions">
+<button id="confirm-cancel-btn" class="settings-btn">取消</button>
+<button id="confirm-ok-btn" class="primary danger">确定</button>
+</div>
+</div>
+</div>
 
 <!-- 底部导航 -->
 <nav class="bottom-nav">
@@ -81,6 +217,7 @@
 </a>
 </nav>
 </div>
+<script src="js/libs/easymde.min.js"></script>
 <script src="js/app.js" type="module"></script>
 </body>
 </html>
