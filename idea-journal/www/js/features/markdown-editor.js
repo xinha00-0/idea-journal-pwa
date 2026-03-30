@@ -4,73 +4,98 @@ export class MarkdownEditor {
     if (!this.element) {
       throw new Error(`Element with id '${elementId}' not found`);
     }
-    
-    if (typeof EasyMDE === 'undefined') {
-      throw new Error('EasyMDE is not loaded. Please include easymde.min.js in your HTML.');
-    }
-    
+
+    this.instance = null;
+    this.onContentChange = null;
+
     this.options = {
       spellChecker: false,
-      autofocus: true,
+      autofocus: false,
       placeholder: '此刻你在想什么？支持 Markdown 语法...',
-      status: ['lines', 'words', 'cursor'],
-      toolbar: [
-        'bold', 'italic', 'heading', '|',
-        'quote', 'unordered-list', 'ordered-list', '|',
-        'link', 'image', 'table', '|',
-        'preview', 'side-by-side', 'fullscreen', '|',
-        'guide'
-      ],
+      status: false,
+      toolbar: false,
       ...options
     };
-    
+
     this.init();
   }
-  
+
   init() {
-    this.instance = new EasyMDE({
-      element: this.element,
-      ...this.options
-    });
-    
-    this.instance.codemirror.on('change', () => {
-      this.onContentChange?.(this.getContent());
-    });
+    if (typeof EasyMDE !== 'undefined') {
+      this.instance = new EasyMDE({
+        element: this.element,
+        ...this.options
+      });
+
+      this.instance.codemirror.on('change', () => {
+        if (this.onContentChange) {
+          this.onContentChange(this.getContent());
+        }
+      });
+    } else {
+      this.element.addEventListener('input', () => {
+        if (this.onContentChange) {
+          this.onContentChange(this.getContent());
+        }
+      });
+    }
   }
-  
+
   getContent() {
-    return this.instance.value();
+    if (this.instance) {
+      return this.instance.value();
+    }
+    return this.element.value || '';
   }
-  
+
   setContent(content) {
-    this.instance.value(content);
+    if (this.instance) {
+      this.instance.value(content);
+    } else {
+      this.element.value = content;
+    }
   }
-  
+
   insertMarkdown(syntax) {
-    const cm = this.instance.codemirror;
-    const doc = cm.getDoc();
-    const cursor = doc.getCursor();
-    doc.replaceRange(syntax, cursor);
+    if (this.instance) {
+      const cm = this.instance.codemirror;
+      const doc = cm.getDoc();
+      const cursor = doc.getCursor();
+      doc.replaceRange(syntax, cursor);
+      cm.focus();
+    } else {
+      const start = this.element.selectionStart;
+      const value = this.element.value;
+      this.element.value = value.substring(0, start) + syntax + value.substring(start);
+      this.element.selectionStart = this.element.selectionEnd = start + syntax.length;
+      this.element.focus();
+    }
   }
-  
+
   insertImage(imageData) {
     const markdown = `![图片](${imageData})`;
     this.insertMarkdown(markdown);
   }
-  
+
   clear() {
-    this.instance.value('');
+    if (this.instance) {
+      this.instance.value('');
+    } else {
+      this.element.value = '';
+    }
   }
-  
+
   destroy() {
-    this.instance.toTextArea();
-    this.instance = null;
+    if (this.instance) {
+      this.instance.toTextArea();
+      this.instance = null;
+    }
   }
-  
+
   setOnContentChange(callback) {
     this.onContentChange = callback;
   }
-  
+
   autoSaveDraft() {
     const content = this.getContent();
     if (content.trim()) {
@@ -80,21 +105,25 @@ export class MarkdownEditor {
       }));
     }
   }
-  
+
   loadDraft() {
     const draft = localStorage.getItem('draft-idea');
     if (draft) {
-      const { content, timestamp } = JSON.parse(draft);
-      const draftAge = Date.now() - new Date(timestamp).getTime();
-      if (draftAge < 24 * 60 * 60 * 1000) {
-        return content;
-      } else {
+      try {
+        const { content, timestamp } = JSON.parse(draft);
+        const draftAge = Date.now() - new Date(timestamp).getTime();
+        if (draftAge < 24 * 60 * 60 * 1000) {
+          return content;
+        } else {
+          localStorage.removeItem('draft-idea');
+        }
+      } catch (e) {
         localStorage.removeItem('draft-idea');
       }
     }
     return null;
   }
-  
+
   clearDraft() {
     localStorage.removeItem('draft-idea');
   }

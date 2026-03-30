@@ -66,7 +66,7 @@ export class WeeklyReport {
     const distributionSection = document.createElement('div');
     distributionSection.className = 'report-section';
     
-    const dates = Object.keys(this.report.dailyDistribution).sort((a, b) => new Date(b[0]) - new Date(a[0]));
+    const dates = Object.keys(this.report.dailyDistribution).sort((a, b) => new Date(a) - new Date(b));
     let distributionHTML = '';
     dates.forEach(date => {
       distributionHTML += `

@@ -1,101 +1,120 @@
 export class DataImporter {
-  constructor(database) {
-    this.db = database;
-  }
-  
-  async importFile(file) {
-    const extension = file.name.split('.').pop().toLowerCase();
-    
-    switch (extension) {
-      case 'json':
-        return this.importJSON(file);
-      case 'md':
-      case 'markdown':
-        return this.importMarkdown(file);
-      default:
-        throw new Error(`不支持的文件格式: ${extension}`);
+  importJSON(fileContent) {
+    let parsed;
+    if (typeof fileContent === 'string') {
+      parsed = JSON.parse(fileContent);
+    } else {
+      parsed = fileContent;
     }
-  }
-  
-  async importJSON(file) {
-    const text = await file.text();
-    const data = JSON.parse(text);
-    
-    if (!Array.isArray(data.ideas)) {
-      throw new Error('JSON格式无效：ideas数组缺失');
+
+    if (parsed.ideas && Array.isArray(parsed.ideas)) {
+      return parsed.ideas.map(idea => this.normalizeIdea(idea));
     }
-    
-    const imported = [];
-    
-    for (const idea of data.ideas) {
-      const id = await this.db.addIdea(idea);
-      imported.push(id);
+
+    if (Array.isArray(parsed)) {
+      return parsed.map(idea => this.normalizeIdea(idea));
     }
-    
-    return imported.length;
+
+    throw new Error('Invalid JSON format: expected array of ideas or object with ideas property');
   }
-  
-  async importMarkdown(file) {
-    const text = await file.text();
-    const ideas = this.parseMarkdown(text);
-    
-    for (const idea of ideas) {
-      await this.db.addIdea(idea);
-    }
-    
-    return ideas.length;
+
+  importMarkdown(content) {
+    return this.parseMarkdown(content);
   }
-  
+
   parseMarkdown(content) {
     const ideas = [];
-    let currentIdea = null;
-    let inTagsSection = false;
-    
-    const lines = content.split('\n');
-    
-    for (const line of lines) {
-      const trimmedLine = line.trim();
-      
-      if (!trimmedLine) {
-        if (currentIdea && !inTagsSection) {
-          currentIdea.content += '\n';
-        }
+    const sections = content.split(/^---$/m).filter(s => s.trim());
+
+    for (const section of sections) {
+      const lines = section.trim().split('\n');
+      const idea = {
+        title: '',
+        content: '',
+        tags: [],
+        created: new Date()
+      };
+
+      if (lines[0] && lines[0].startsWith('# ')) {
         continue;
       }
-      
-      if (trimmedLine.startsWith('## ')) {
-        if (currentIdea) {
-          ideas.push(currentIdea);
+
+      const titleMatch = section.match(/^## (.+)$/m);
+      if (titleMatch) {
+        idea.title = titleMatch[1].trim();
+      }
+
+      const timeMatch = section.match(/^> 创建时间: (.+)$/m);
+      if (timeMatch) {
+        const parsed = new Date(timeMatch[1].trim());
+        idea.created = isNaN(parsed.getTime()) ? new Date() : parsed;
+      }
+
+      const categoryMatch = section.match(/^\*\*分类:\*\* (.+)$/m);
+      if (categoryMatch) {
+        idea.category = categoryMatch[1].trim();
+      }
+
+      const tagsMatch = section.match(/^\*\*标签:\*\* (.+)$/m);
+      if (tagsMatch) {
+        idea.tags = tagsMatch[1].split(',').map(t => t.trim()).filter(Boolean);
+      }
+
+      const contentLines = [];
+      let inContent = false;
+      for (const line of lines) {
+        if (line.startsWith('## ') || line.startsWith('> ') || line.startsWith('**分类:**') || line.startsWith('**标签:**')) {
+          continue;
         }
-        
-        currentIdea = {
-          title: trimmedLine.substring(3).trim(),
-          content: '',
-          tags: [],
-          created: new Date(),
-          updated: new Date()
-        };
-        inTagsSection = false;
-      } else if (trimmedLine.startsWith('### 标签')) {
-        inTagsSection = true;
-      } else if (inTagsSection && trimmedLine.startsWith('- ')) {
-        const tag = trimmedLine.substring(2).trim();
-        if (currentIdea) {
-          currentIdea.tags.push(tag);
+        if (line.trim() === '') {
+          if (inContent) contentLines.push('');
+          continue;
         }
-      } else if (currentIdea && !inTagsSection) {
-        if (currentIdea.content === '') {
-          currentIdea.content = trimmedLine;
-        } else {
-          currentIdea.content += ' ' + trimmedLine;
-        }
+        inContent = true;
+        contentLines.push(line);
+      }
+
+      idea.content = contentLines.join('\n').trim();
+
+      if (idea.title || idea.content) {
+        ideas.push(idea);
       }
     }
-    
-    if (currentIdea) {
-      ideas.push(currentIdea);
-    }
-    
+
     return ideas;
+  }
+
+  async importFile(file) {
+    const text = await this.readFileAsText(file);
+    const extension = file.name.split('.').pop().toLowerCase();
+
+    if (extension === 'json') {
+      return this.importJSON(text);
+    }
+
+    if (extension === 'md' || extension === 'markdown') {
+      return this.importMarkdown(text);
+    }
+
+    throw new Error(`Unsupported file format: .${extension}`);
+  }
+
+  readFileAsText(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(new Error('Failed to read file'));
+      reader.readAsText(file);
+    });
+  }
+
+  normalizeIdea(idea) {
+    return {
+      title: idea.title || '',
+      content: idea.content || '',
+      tags: Array.isArray(idea.tags) ? [...idea.tags] : [],
+      category: idea.category || '',
+      created: idea.created ? new Date(idea.created) : new Date()
+    };
   }
 }

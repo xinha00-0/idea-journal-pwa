@@ -1,81 +1,69 @@
 export class ImageCompressor {
   constructor(options = {}) {
-    this.options = {
-      maxWidth: 1200,
-      maxHeight: 1200,
-      quality: 0.8,
-      mimeType: 'image/jpeg',
-      ...options
-    };
+    this.maxWidth = options.maxWidth ?? 1200;
+    this.maxHeight = options.maxHeight ?? 1200;
+    this.quality = options.quality ?? 0.8;
+    this.mimeType = options.mimeType ?? 'image/jpeg';
   }
-  
-  async compress(file) {
+
+  compress(file) {
     return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      
-      reader.onload = (event) => {
-        const img = new Image();
-        
-        img.onload = () => {
-          try {
-            const compressed = this.processImage(img);
-            resolve(compressed);
-          } catch (error) {
-            reject(error);
-          }
-        };
-        
-        img.onerror = reject;
-        img.src = event.target.result;
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        this.processImage(img).then(resolve).catch(reject);
       };
-      
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
+
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        reject(new Error('Failed to load image'));
+      };
+
+      img.src = url;
     });
   }
-  
+
   processImage(img) {
-    const { width, height } = img;
-    const { maxWidth, maxHeight, quality, mimeType } = this.options;
-    
-    let newWidth = width;
-    let newHeight = height;
-    
-    if (width > height) {
-      if (width > maxWidth) {
-        newWidth = maxWidth;
-        newHeight = height * (maxWidth / width);
-      }
-    } else {
-      if (height > maxHeight) {
-        newHeight = maxHeight;
-        newWidth = width * (maxHeight / height);
-      }
+    let { naturalWidth: width, naturalHeight: height } = img;
+
+    if (width > this.maxWidth) {
+      height = (height * this.maxWidth) / width;
+      width = this.maxWidth;
     }
-    
+    if (height > this.maxHeight) {
+      width = (width * this.maxHeight) / height;
+      height = this.maxHeight;
+    }
+
+    width = Math.round(width);
+    height = Math.round(height);
+
     const canvas = document.createElement('canvas');
-    canvas.width = newWidth;
-    canvas.height = newHeight;
+    canvas.width = width;
+    canvas.height = height;
+
     const ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0, newWidth, newHeight);
-    
+    ctx.drawImage(img, 0, 0, width, height);
+
     return new Promise((resolve) => {
       canvas.toBlob(
         (blob) => resolve(blob),
-        mimeType,
-        quality
+        this.mimeType,
+        this.quality
       );
     });
   }
-  
-  async compressToBase64(file) {
-    const blob = await this.compress(file);
-    
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (event) => resolve(event.target.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
+
+  compressToBase64(file) {
+    return this.compress(file).then((blob) => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error('Failed to read blob as base64'));
+        reader.readAsDataURL(blob);
+      });
     });
   }
 }

@@ -1,0 +1,18 @@
+{
+  "appShortName": "想法记录",
+  "appDescription": "捕捉灵感和想法的记录工具",
+  "backgroundColor": "#fbf9f8",
+  "themeColor": "#006e1c",
+  "manifestUrl": "./manifest.json",
+  "startUrl": "./index.html",
+  "shortName": "记录",
+  "webSiteUrl": ".",
+  "name": "想法记录",
+  "displayMode": "standalone",
+  "orientation": "portrait",
+  "packageId": "com.ideajournal.app",
+  "iconUrl": "assets/icons/icon-512.png",
+  "splashColor": "#006e1c",
+  "maskableIconUrl": "assets/icons/icon-512.png",
+  "preferRelatedApplications": false
+}

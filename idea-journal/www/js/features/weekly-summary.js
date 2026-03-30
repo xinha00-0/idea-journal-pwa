@@ -107,12 +107,13 @@ export class WeeklySummary {
   
   getDailyDistribution(ideas) {
     const distribution = {};
-    
+
     ideas.forEach(idea => {
-      const date = idea.created.toISOString().split('T')[0];
+      const d = new Date(idea.created);
+      const date = d.toISOString().split('T')[0];
       distribution[date] = (distribution[date] || 0) + 1;
     });
-    
+
     return distribution;
   }
   

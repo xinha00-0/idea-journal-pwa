@@ -1,33 +1,90 @@
 export class TagChip {
-  constructor(tagData, onRemove) {
-    this.tagData = tagData;
-    this.onRemove = onRemove;
+  constructor(tag, options = {}) {
+    this.tag = tag;
+    this.options = {
+      removable: false,
+      clickable: true,
+      ...options
+    };
+    this.element = null;
+    this.onRemove = null;
+    this.onClick = null;
   }
 
   render() {
-    const chip = document.createElement('div');
-    chip.className = 'tag-chip';
-    chip.dataset.id = this.tagData.id;
+    this.element = document.createElement('span');
+    this.element.className = 'tag-chip';
+    this.element.dataset.tagId = this.tag.id;
+    this.element.setAttribute('role', 'button');
+    this.element.setAttribute('tabindex', '0');
 
-    const colorDot = document.createElement('div');
-    colorDot.className = 'tag-dot';
-    colorDot.style.backgroundColor = this.tagData.color;
+    const color = this.tag.color || '#6366f1';
+    this.element.style.setProperty('--tag-color', color);
+    this.element.style.backgroundColor = color + '20';
+    this.element.style.color = color;
+    this.element.style.borderColor = color + '40';
 
-    const text = document.createElement('span');
-    text.className = 'tag-text';
-    text.textContent = this.tagData.name;
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'tag-name';
+    nameSpan.textContent = this.tag.name;
+    this.element.appendChild(nameSpan);
 
-    chip.appendChild(colorDot);
-    chip.appendChild(text);
-
-    if (this.onRemove) {
-      const removeBtn = document.createElement('span');
-      removeBtn.className = 'tag-remove';
-      removeBtn.textContent = '×';
-      removeBtn.onclick = () => this.onRemove(this.tagData.id);
-      chip.appendChild(removeBtn);
+    if (this.tag.count > 0) {
+      const countSpan = document.createElement('span');
+      countSpan.className = 'tag-count';
+      countSpan.textContent = this.tag.count;
+      this.element.appendChild(countSpan);
     }
 
-    return chip;
+    if (this.options.removable) {
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'tag-remove';
+      removeBtn.setAttribute('aria-label', `Remove tag ${this.tag.name}`);
+      removeBtn.innerHTML = '&times;';
+      removeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (this.onRemove) {
+          this.onRemove(this.tag);
+        }
+      });
+      this.element.appendChild(removeBtn);
+    }
+
+    if (this.options.clickable) {
+      this.element.addEventListener('click', () => {
+        if (this.onClick) {
+          this.onClick(this.tag);
+        }
+      });
+    }
+
+    return this.element;
+  }
+
+  update(tag) {
+    this.tag = tag;
+    if (this.element) {
+      const oldElement = this.element;
+      const newElement = this.render();
+      oldElement.replaceWith(newElement);
+    }
+  }
+
+  destroy() {
+    if (this.element) {
+      this.element.remove();
+      this.element = null;
+    }
+  }
+
+  static renderList(tags, container, options = {}) {
+    container.innerHTML = '';
+    const chips = [];
+    for (const tag of tags) {
+      const chip = new TagChip(tag, options);
+      container.appendChild(chip.render());
+      chips.push(chip);
+    }
+    return chips;
   }
 }

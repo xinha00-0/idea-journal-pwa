@@ -10,7 +10,6 @@ export class SettingsComponent {
   init() {
     this.render();
     this.bindEvents();
-    this.loadSettings();
   }
 
   render() {
@@ -18,261 +17,148 @@ export class SettingsComponent {
   }
 
   renderSettings() {
-    const settings = [
-      {
-        id: 'theme',
-        title: '外观设置',
-        icon: 'palette',
-        options: [
-          { id: 'theme-light', label: '浅色主题', value: 'light' },
-          { id: 'theme-dark', label: '深色主题', value: 'dark' }
-        ]
-      },
-      {
-        id: 'font-size',
-        title: '字体大小',
-        icon: 'text_fields',
-        options: [
-          { id: 'font-small', label: '小', value: '14' },
-          { id: 'font-medium', label: '中', value: '16' },
-          { id: 'font-large', label: '大', value: '18' },
-          { id: 'font-xlarge', label: '特大', value: '24' }
-        ]
-      },
-      {
-        id: 'auto-save',
-        title: '自动保存',
-        icon: 'save',
-        type: 'toggle',
-        checked: true
-      },
-      {
-        id: 'storage',
-        title: '数据管理',
-        icon: 'database',
-        options: [
-          { id: 'storage-info', label: '查看', value: 'view' },
-          { id: 'storage-cleanup', label: '清理', value: 'cleanup' },
-          { id: 'storage-export-json', label: '导出JSON', value: 'export-json' },
-          { id: 'storage-export-md', label: '导出Markdown', value: 'export-md' },
-          { id: 'storage-backup', label: '创建备份', value: 'backup' },
-          { id: 'storage-restore', label: '恢复备份', value: 'restore' }
-        ]
-      },
-      {
-        id: 'about',
-        title: '关于',
-        icon: 'info',
-        options: [
-          { id: 'about-version', label: '版本信息', value: 'version' },
-          { id: 'about-help', label: '使用帮助', value: 'help' },
-          { id: 'about-feedback', label: '反馈', value: 'feedback' }
-        ]
-      }
-    ];
-
-    let html = `
+    return `
       <div class="settings-header">
         <h2 class="settings-title">设置</h2>
       </div>
-    `;
 
-    settings.forEach(section => {
-      html += this.renderSection(section);
-    });
-
-    return html;
-  }
-
-  renderSection(section) {
-    let optionsHtml = '';
-
-    if (section.type === 'toggle') {
-      optionsHtml = `
+      <div class="settings-section">
+        <h3>外观设置</h3>
         <div class="setting-item">
           <div class="setting-info">
-            <label for="auto-save-toggle">自动保存</label>
-            <p>自动保存想法的更改</p>
+            <label>主题模式</label>
           </div>
           <div class="setting-control">
-            <input type="checkbox" id="auto-save-toggle" class="toggle-switch">
+            <select id="theme-select" class="setting-select">
+              <option value="light">浅色</option>
+              <option value="dark">深色</option>
+            </select>
           </div>
         </div>
-      `;
-    } else {
-      optionsHtml = this.renderOptions(section.id, section.options);
-    }
+      </div>
 
-    return `
       <div class="settings-section">
-        <h3>${section.title}</h3>
-        ${optionsHtml}
+        <h3>字体大小</h3>
+        <div class="setting-item">
+          <div class="setting-info">
+            <label>字号</label>
+          </div>
+          <div class="setting-control">
+            <select id="font-size-select" class="setting-select">
+              <option value="14">小</option>
+              <option value="16" selected>中</option>
+              <option value="18">大</option>
+              <option value="20">特大</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h3>编辑器</h3>
+        <div class="setting-item">
+          <div class="setting-info">
+            <label for="auto-save-toggle">自动保存草稿</label>
+            <p>每2秒自动保存编辑内容</p>
+          </div>
+          <div class="setting-control">
+            <input type="checkbox" id="auto-save-toggle" class="toggle-switch" checked>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h3>数据管理</h3>
+        <button id="storage-info" class="setting-btn">查看存储信息</button>
+        <button id="storage-export-json" class="setting-btn">导出 JSON</button>
+        <button id="storage-export-md" class="setting-btn">导出 Markdown</button>
+        <button id="storage-backup" class="setting-btn">创建备份</button>
+        <button id="storage-restore" class="setting-btn">恢复备份</button>
+        <button id="storage-cleanup" class="setting-btn" style="color:#c62828;">清理旧数据</button>
+      </div>
+
+      <div class="settings-section">
+        <h3>关于</h3>
+        <button id="about-version" class="setting-btn">版本信息</button>
+        <button id="about-help" class="setting-btn">使用帮助</button>
       </div>
     `;
   }
 
-  renderOptions(sectionId, options) {
-    let html = '';
-
-    options.forEach(option => {
-      html += `
-        <div class="setting-item">
-          <div class="setting-info">
-            <label for="${option.id}">${option.label}</label>
-          </div>
-          <div class="setting-control">
-            ${this.renderOptionControl(option)}
-          </div>
-        </div>
-      `;
-    });
-
-    return html;
-  }
-
-  renderOptionControl(option) {
-    if (option.type === 'toggle') {
-      return `<input type="checkbox" id="${option.id}" ${option.checked ? 'checked' : ''} class="toggle-switch">`;
-    } else if (option.type === 'slider') {
-      return `<input type="range" id="${option.id}" min="${option.min}" max="${option.max}" value="${option.value}" step="${option.step || 1}">`;
-    } else {
-      return `<button id="${option.id}" class="setting-btn">${option.label}</button>`;
-    }
-  }
-
-  renderButton(action) {
-    const btn = `<button class="setting-btn ${action.primary ? 'primary' : ''}">${action.label}</button>`;
-    return btn;
-  }
-
-  renderTextControl(valueId, currentValue) {
-    const element = document.getElementById(valueId);
-    if (element) {
-      element.textContent = currentValue;
-    }
-  }
-
   bindEvents() {
-    const autoSaveToggle = document.getElementById('auto-save-toggle');
-    if (autoSaveToggle) {
-      autoSaveToggle.addEventListener('change', () => {
-        localStorage.setItem('app-auto-save', autoSaveToggle.checked);
+    const themeSelect = document.getElementById('theme-select');
+    if (themeSelect) {
+      themeSelect.addEventListener('change', () => {
+        this.themeManager.setTheme(themeSelect.value);
       });
     }
 
-    this.bindButtonEvents();
-  }
-
-  bindButtonEvents() {
-    const buttons = document.querySelectorAll('.setting-btn');
-
-    buttons.forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const option = this.findOptionById(btn.id);
-        if (option) {
-          await this.handleSettingAction(btn.id, option);
-        }
-      });
-    });
-
-    const autoSaveToggle = document.getElementById('auto-save-toggle');
-    if (autoSaveToggle) {
-      autoSaveToggle.addEventListener('change', () => {
-        localStorage.setItem('app-auto-save', autoSaveToggle.checked);
-      });
-    }
-  }
-
-  findOptionById(id) {
-    if (id === 'storage-info') {
-      return { sectionId: 'storage', value: 'view' };
-    } else if (id === 'storage-cleanup') {
-      return { sectionId: 'storage', value: 'cleanup' };
-    } else if (id === 'storage-export-json') {
-      return { sectionId: 'storage', value: 'export-json' };
-    } else if (id === 'storage-export-md') {
-      return { sectionId: 'storage', value: 'export-md' };
-    } else if (id === 'storage-backup') {
-      return { sectionId: 'storage', value: 'backup' };
-    } else if (id === 'storage-restore') {
-      return { sectionId: 'storage', value: 'restore' };
-    } else if (id === 'about-version') {
-      return { sectionId: 'about', value: 'version' };
-    } else if (id === 'about-help') {
-      return { sectionId: 'about', value: 'help' };
-    } else if (id === 'about-feedback') {
-      return { sectionId: 'about', value: 'feedback' };
-    }
-    return null;
-  }
-
-  async handleSettingAction(settingId, option) {
-    switch (option.sectionId) {
-      case 'theme':
-        if (option.value === 'dark') {
-          this.themeManager.setTheme('dark');
-        } else {
-          this.themeManager.setTheme('light');
-        }
-        break;
-      case 'font-size':
-        const size = parseInt(option.value);
+    const fontSizeSelect = document.getElementById('font-size-select');
+    if (fontSizeSelect) {
+      fontSizeSelect.addEventListener('change', () => {
+        const size = parseInt(fontSizeSelect.value);
         document.documentElement.style.fontSize = `${size}px`;
         localStorage.setItem('app-font-size', size);
-        break;
-      case 'auto-save':
-        const enabled = document.getElementById('auto-save-toggle');
-        enabled.checked = !enabled.checked;
-        localStorage.setItem('app-auto-save', enabled.checked);
-        break;
-      case 'storage':
-        if (option.value === 'view') {
-          await this.showStorageInfo();
-        } else if (option.value === 'cleanup') {
-          await this.cleanupOldData();
-        } else if (option.value === 'export-json') {
-          await this.exportData('json');
-        } else if (option.value === 'export-md') {
-          await this.exportData('markdown');
-        } else if (option.value === 'backup') {
-          await this.createBackup();
-        } else if (option.value === 'restore') {
-          await this.restoreBackup();
-        }
-        break;
-      case 'about':
-        if (option.value === 'version') {
-          alert('版本信息：v1.0.0');
-        } else if (option.value === 'help') {
-          this.showHelp();
-        } else if (option.value === 'feedback') {
-          this.showFeedback();
-        }
-        break;
+      });
     }
+
+    const autoSaveToggle = document.getElementById('auto-save-toggle');
+    if (autoSaveToggle) {
+      autoSaveToggle.addEventListener('change', () => {
+        localStorage.setItem('app-auto-save', autoSaveToggle.checked);
+      });
+    }
+
+    const actions = {
+      'storage-info': () => this.showStorageInfo(),
+      'storage-export-json': () => this.exportData('json'),
+      'storage-export-md': () => this.exportData('markdown'),
+      'storage-backup': () => this.createBackup(),
+      'storage-restore': () => this.restoreBackup(),
+      'storage-cleanup': () => this.cleanupOldData(),
+      'about-version': () => alert('想法记录 v1.0.0\n\n一个简洁的想法记录工具'),
+      'about-help': () => this.showHelp()
+    };
+
+    Object.entries(actions).forEach(([id, handler]) => {
+      const btn = document.getElementById(id);
+      if (btn) {
+        btn.addEventListener('click', handler);
+      }
+    });
+  }
+
+  async loadSettings() {
+    const theme = localStorage.getItem('app-theme') || 'light';
+    const fontSize = localStorage.getItem('app-font-size') || '16';
+    const autoSave = localStorage.getItem('app-auto-save') !== 'false';
+
+    const themeSelect = document.getElementById('theme-select');
+    if (themeSelect) themeSelect.value = theme;
+
+    const fontSizeSelect = document.getElementById('font-size-select');
+    if (fontSizeSelect) fontSizeSelect.value = fontSize;
+
+    const autoSaveToggle = document.getElementById('auto-save-toggle');
+    if (autoSaveToggle) autoSaveToggle.checked = autoSave;
+
+    this.themeManager.setTheme(theme);
+    document.documentElement.style.fontSize = `${fontSize}px`;
   }
 
   async showStorageInfo() {
     const info = await this.dataManager.getStorageInfo();
-
-    alert(`存储信息：
-想法数量: ${info.ideasCount}
-标签数量: ${info.tagsCount}
-分类数量: ${info.categoriesCount}
-总大小: ${info.formattedSize}`);
+    alert(`存储信息\n\n想法数量: ${info.ideasCount}\n标签数量: ${info.tagsCount}\n分类数量: ${info.categoriesCount}\n总大小: ${info.formattedSize}`);
   }
 
   async createBackup() {
     const backup = await this.dataManager.backupData();
     const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
-
     const url = URL.createObjectURL(blob);
-
     const a = document.createElement('a');
     a.href = url;
     a.download = `idea-journal-backup-${new Date().toISOString().split('T')[0]}.json`;
     a.click();
-
     URL.revokeObjectURL(url);
   }
 
@@ -345,24 +231,6 @@ export class SettingsComponent {
   }
 
   showHelp() {
-    alert('使用帮助：\n1. 点击右下角的"+"按钮创建新想法\n2. 使用Markdown语法编写内容\n3. 添加标签和分类组织想法\n4. 使用搜索功能查找想法\n5. 在统计页面查看热力图\n6. 在设置页面管理数据\n7. 在回顾页面查看周报\n8. 使用导出功能备份数据');
-  }
-
-  showFeedback() {
-    alert('感谢您的反馈！\n\n您可以通过以下方式联系我们：\n- 提交GitHub Issue\n- 发送邮件至 support@ideajournal.com\n\n我们会认真对待每一条反馈。');
-  }
-
-  async loadSettings() {
-    const theme = localStorage.getItem('app-theme') || 'light';
-    const fontSize = localStorage.getItem('app-font-size') || '16';
-    const autoSave = localStorage.getItem('app-auto-save') !== 'false';
-
-    const autoSaveToggle = document.getElementById('auto-save-toggle');
-    if (autoSaveToggle) {
-      autoSaveToggle.checked = autoSave;
-    }
-
-    this.themeManager.setTheme(theme);
-    document.documentElement.style.fontSize = `${fontSize}px`;
+    alert('使用帮助\n\n1. 点击右上角"+"按钮创建新想法\n2. 支持Markdown语法编写\n3. 点击相机图标插入图片\n4. 使用标签组织想法\n5. 点击搜索图标搜索内容\n6. 在回顾页面查看周报\n7. 在统计页面查看数据\n8. 在设置页面管理数据备份');
   }
 }

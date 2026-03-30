@@ -1,36 +1,169 @@
-.easy-mde-container {
-  border: none;
-  border-radius: 8px;
+.editor-container {
+  background: var(--card-bg);
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 1rem;
 }
 
-.EasyMDEContainer .CodeMirror {
+.editor-container .EasyMDEContainer {
   border: none;
-  padding: 16px;
-  font-size: 16px;
-  line-height: 1.6;
-  font-family: 'Inter', sans-serif;
 }
 
-.EasyMDEContainer .editor-toolbar {
+.editor-container .EasyMDEContainer .editor-toolbar {
   border: none;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--card-bg);
+  padding: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.editor-container .EasyMDEContainer .editor-toolbar button {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  color: #666;
   background: transparent;
-  padding: 8px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-.EasyMDEContainer .editor-toolbar button {
-  color: #3f4a3c;
+.editor-container .EasyMDEContainer .editor-toolbar button:hover {
+  background: #f0f0f0;
+  color: var(--text-color);
+}
+
+.editor-container .EasyMDEContainer .editor-toolbar button.active {
+  background: var(--theme-color);
+  color: white;
+}
+
+.editor-container .EasyMDEContainer .editor-toolbar .separator {
+  width: 1px;
+  height: 24px;
+  background: var(--border-color);
+  margin: 6px 4px;
+}
+
+.editor-container .EasyMDEContainer .CodeMirror {
   border: none;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.6;
+  min-height: 200px;
+  padding: 0.5rem;
+  background: transparent;
+  color: var(--text-color);
+}
+
+.editor-container .EasyMDEContainer .CodeMirror-focused {
+  outline: none;
+}
+
+.editor-container .EasyMDEContainer .CodeMirror-placeholder {
+  color: #999;
+}
+
+.editor-container .EasyMDEContainer .editor-preview {
+  padding: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-color);
+}
+
+.editor-container .EasyMDEContainer .editor-preview h1,
+.editor-container .EasyMDEContainer .editor-preview h2,
+.editor-container .EasyMDEContainer .editor-preview h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.editor-container .EasyMDEContainer .editor-preview h1 {
+  font-size: 1.5rem;
+}
+
+.editor-container .EasyMDEContainer .editor-preview h2 {
+  font-size: 1.25rem;
+}
+
+.editor-container .EasyMDEContainer .editor-preview h3 {
+  font-size: 1.1rem;
+}
+
+.editor-container .EasyMDEContainer .editor-preview p {
+  margin-bottom: 0.75rem;
+}
+
+.editor-container .EasyMDEContainer .editor-preview blockquote {
+  border-left: 3px solid var(--theme-color);
+  padding-left: 1rem;
+  margin: 0.75rem 0;
+  color: #666;
+}
+
+.editor-container .EasyMDEContainer .editor-preview code {
+  background: #f5f5f5;
+  padding: 0.125rem 0.375rem;
   border-radius: 4px;
+  font-size: 0.875rem;
 }
 
-.EasyMDEContainer .editor-toolbar button:hover {
-  background: #f6f3f2;
+.editor-container .EasyMDEContainer .editor-preview pre {
+  background: #f5f5f5;
+  padding: 0.75rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0.75rem 0;
 }
 
-.EasyMDEContainer .editor-statusbar {
-  border: none;
-  padding: 8px;
-  font-size: 12px;
-  color: #3f4a3c;
+.editor-container .EasyMDEContainer .editor-preview img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.editor-container .EasyMDEContainer .editor-preview table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+}
+
+.editor-container .EasyMDEContainer .editor-preview th,
+.editor-container .EasyMDEContainer .editor-preview td {
+  border: 1px solid var(--border-color);
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.editor-container .EasyMDEContainer .editor-preview th {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+.draft-indicator {
+  font-size: 0.75rem;
+  color: #999;
+  padding: 0.25rem 0.75rem;
+  text-align: right;
+}
+
+.draft-indicator.has-draft {
+  color: var(--theme-color);
+}
+
+@media (max-width: 768px) {
+  .editor-container .EasyMDEContainer .CodeMirror {
+    min-height: 150px;
+  }
+
+  .editor-container .EasyMDEContainer .editor-toolbar button {
+    width: 32px;
+    height: 32px;
+  }
 }
