@@ -6,6 +6,7 @@ export class IdeaList {
   }
 
   async loadIdeas(database) {
+    this.database = database;
     this.allIdeas = await database.getAllIdeas();
     this.allIdeas.sort((a, b) => new Date(b.created) - new Date(a.created));
     this.ideas = [...this.allIdeas];
