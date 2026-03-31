@@ -128,10 +128,13 @@ export class IdeaList {
   }
 
   async deleteIdea(id) {
-    const { IdeaDatabase } = await import('../storage/database.js');
-    if (this.database) {
+    if (!confirm('确定要删除这条想法吗？')) return;
+    try {
       await this.database.deleteIdea(Number(id));
       await this.loadIdeas(this.database);
+    } catch (err) {
+      console.error('删除失败:', err);
+      alert('删除失败: ' + err.message);
     }
   }
 

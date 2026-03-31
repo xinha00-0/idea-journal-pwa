@@ -1,4 +1,4 @@
-const CACHE_NAME = 'idea-journal-v2';
+const CACHE_NAME = 'idea-journal-v3';
 
 const BASE = '/idea-journal-pwa';
 
